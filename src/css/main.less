@@ -5,4 +5,47 @@ content {
 	left: 0;
 	right: 0;
 	bottom: 0;
+
+	.fighter {
+		position: absolute;
+		top: 50px;
+		left: 50px;
+		zoom: 2;
+		image-rendering: pixelated;
+		background: url(~/gfx/sprite.png) no-repeat;
+		background-position: 0 0;
+		width: 70px;
+		height: 64px;
+		// animation: walk 1000ms steps(3) infinite;
+		// animation: low-kick 900ms steps(2) infinite;
+		// animation: mid-kick 1000ms steps(4) infinite;
+		animation: hi-kick 1100ms steps(4) infinite;
+	}
+}
+
+@keyframes walk {
+	0%   { background-position: 0 0; }
+	50%  { background-position: -210px 0; }
+	100% { background-position: 0 0; }
+}
+
+@keyframes hi-kick {
+	0%   { background-position: 0 -64px; }
+	46%  { background-position: -280px -64px; }
+	54%  { background-position: -280px -64px; }
+	100% { background-position: 0 -64px; }
+}
+
+@keyframes mid-kick {
+	0%   { background-position: 0 -128px; }
+	46%  { background-position: -280px -128px; }
+	54%  { background-position: -280px -128px; }
+	100% { background-position: 0 -128px; }
+}
+
+@keyframes low-kick {
+	0%   { background-position: 0 -192px; }
+	46%  { background-position: -140px -192px; }
+	54%  { background-position: -140px -192px; }
+	100% { background-position: 0 -192px; }
 }
