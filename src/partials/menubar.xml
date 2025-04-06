@@ -1,8 +1,8 @@
 <MenuBar>
-	<Menu name="International Karate">
-		<Menu name="About International Karate" shell="win -a"/>
+	<Menu name="Karate Plus">
+		<Menu name="About Karate Plus" shell="win -a"/>
 		<Menu type="divider"/>
-		<Menu name="Quit International Karate" shell="win -c"/>
+		<Menu name="Quit Karate Plus" shell="win -c"/>
 	</Menu>
 	<Menu name="Help">
 		<Menu name="Help" click="open-help"/>
