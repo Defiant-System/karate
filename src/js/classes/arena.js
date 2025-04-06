@@ -25,9 +25,7 @@ class Arena {
 		});
 
 		// assets list
-		let assets = [
-				{ id: "fighter", width: 720, height: 720, src: "~/gfx/sprite.png" },
-			],
+		let assets = [...Assets.sprites],
 			loadAssets = () => {
 				let item = assets.pop(),
 					img = new Image();

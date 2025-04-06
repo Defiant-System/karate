@@ -4,6 +4,7 @@
 @import "./classes/player.js"
 @import "./classes/ai.js"
 
+@import "./modules/assets.js"
 @import "./modules/test.js"
 
 
