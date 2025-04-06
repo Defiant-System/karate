@@ -16,12 +16,40 @@ class Arena {
 		// create FPS controller
 		let Self = this;
 		this.fpsControl = karaqu.FpsControl({
-			fps: 10,
+			fps: 3,
+			autoplay: true,
 			callback(time, delta) {
 				Self.update(delta, time);
 				Self.render();
 			}
 		});
+
+		// assets list
+		let assets = [
+				{ id: "fighter", width: 560, height: 256, src: "~/gfx/sprite.png" },
+			],
+			loadAssets = () => {
+				let item = assets.pop(),
+					img = new Image();
+				img.src = item.src;
+				img.onload = () => {
+					// save reference to asset
+					this.assets[item.id] = { item, img };
+					// are we done yet?
+					assets.length ? loadAssets() : this.ready();
+				};
+			};
+		// asset lib
+		this.assets = {};
+		
+		// load assets
+		loadAssets();
+	}
+
+	ready() {
+		// add temp fighter(s)
+		this.player = new Fighter({ arena: this });
+		this.entities.push(this.player);
 	}
 
 	update(delta, time) {
@@ -29,9 +57,14 @@ class Arena {
 	}
 
 	render() {
-		let ctx = this.ctx;
+		// clear canvas
+		this.cvs.attr({ width: this.width });
+		this.ctx.imageSmoothingEnabled = false;
 		// draw entries - exclude droids
-		this.entities.map(entity => entity.render(ctx));
+		this.entities.map(entity => entity.render(this.ctx));
+
+		// for debug info
+		this.drawFps(this.ctx);
 	}
 
 	drawFps(ctx) {
