@@ -1,2 +1,2 @@
-# Internation Karate
+# International Karate
 <img src="public/icon.svg" width=200 height=200>
