@@ -5,15 +5,27 @@ class Fighter {
 
 		this.arena = arena;
 		this.asset = arena.assets.fighter;
-		this.strips = Assets.strips;
+
+		this.size = 144;
+		this.top = 312;
+		this.left = 100;
 
 		// animation frames
 		this.frame = {
-			strip: this.strips.backKick,
+			sheet: "stand",
+			strip: Assets.strips.stand,
 			duration: 150,
 			speed: 150,
 			index: 0,
 		};
+	}
+
+	move(sheet) {
+		if (this.frame.sheet === sheet) return;
+		this.frame.sheet = sheet;
+		this.frame.strip = Assets.strips[sheet];
+		this.frame.duration = this.frame.speed;
+		this.frame.index = 0;
 	}
 
 	update(delta) {
@@ -33,6 +45,6 @@ class Fighter {
 		let frame = this.frame,
 			{ x, y, w, h } = frame.strip[frame.index];
 		// console.log(x, y, w, h );
-		ctx.drawImage(this.asset.img, x, y, w, h, 100, 100, 144, 144);
+		ctx.drawImage(this.asset.img, x, y, w, h, this.left, this.top, this.size, this.size);
 	}
 }

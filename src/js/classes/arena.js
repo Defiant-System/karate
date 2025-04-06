@@ -46,7 +46,7 @@ class Arena {
 
 	ready() {
 		// add temp fighter(s)
-		this.player = new Fighter({ arena: this });
+		this.player = new Player({ arena: this });
 		this.entities.push(this.player);
 	}
 
@@ -68,13 +68,13 @@ class Arena {
 	drawFps(ctx) {
 		let fps = this.fpsControl ? this.fpsControl._log : [];
 		ctx.save();
-		ctx.translate(this.width - 109, 0);
+		ctx.translate(this.width - 119, 45);
 		// draw box
-		ctx.fillStyle = "#0005";
+		ctx.fillStyle = "#0009";
 		ctx.fillRect(5, 5, 100, 40);
-		ctx.fillStyle = "#fff4";
+		ctx.fillStyle = "#fff8";
 		ctx.fillRect(7, 7, 96, 11);
-		ctx.fillStyle = "#fff6";
+		ctx.fillStyle = "#fff7";
 		// loop log
 		for (let i=0; i<96; i++) {
 			let bar = fps[i];
@@ -84,7 +84,7 @@ class Arena {
 			ctx.fillRect(102 - i, 43, 1, -24 * p);
 		}
 		// write fps
-		ctx.fillStyle = "#fff";
+		ctx.fillStyle = "#000";
 		ctx.font = "9px Arial";
 		ctx.textAlign = "left";
 		ctx.fillText('FPS: '+ fps[0], 8, 16);

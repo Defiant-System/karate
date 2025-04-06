@@ -7,19 +7,32 @@ content {
 	bottom: 0;
 
 	.game-view {
+		background: #000;
 		position: absolute;
 		top: 0;
 		left: 0;
 		right: 0;
 		bottom: 0;
 
+		&:before {
+			content: "";
+			position: absolute;
+			top: 46px;
+			left: 10px;
+			width: 760px;
+			height: 420px;
+			background: url(~/gfx/bg-01.png) 50% 50% no-repeat;
+			background-size: 100% auto;
+			image-rendering: pixelated;
+		}
+
 		canvas {
 			// background: red;
 			position: absolute;
 			top: 0;
 			left: 0;
-			width: 800px;
-			height: 500px;
+			width: 780px;
+			height: 475px;
 			image-rendering: pixelated;
 		}
 	}
