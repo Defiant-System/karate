@@ -16,7 +16,7 @@ class Arena {
 		// create FPS controller
 		let Self = this;
 		this.fpsControl = karaqu.FpsControl({
-			fps: 3,
+			fps: 60,
 			autoplay: true,
 			callback(time, delta) {
 				Self.update(delta, time);
@@ -26,7 +26,7 @@ class Arena {
 
 		// assets list
 		let assets = [
-				{ id: "fighter", width: 560, height: 256, src: "~/gfx/sprite.png" },
+				{ id: "fighter", width: 720, height: 720, src: "~/gfx/sprite.png" },
 			],
 			loadAssets = () => {
 				let item = assets.pop(),

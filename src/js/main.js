@@ -24,7 +24,9 @@ const karate = {
 		// DEV-ONLY-END
 	},
 	dispatch(event) {
-		let Self = karate;
+		let Self = karate,
+			name,
+			el;
 		switch (event.type) {
 			// system events
 			case "window.init":
@@ -38,6 +40,17 @@ const karate = {
 			case "open-help":
 				karaqu.shell("fs -u '~/help/index.md'");
 				break;
+			// proxy event
+			default:
+				el = event.el;
+				if (!el && event.origin) el = event.origin.el;
+				if (el && el.length) {
+					let pEl = el.parents(`?div[data-area]`);
+					if (pEl.length) {
+						name = pEl.data("area");
+						return Self[name].dispatch(event);
+					}
+				}
 		}
 	},
 	game: @import "./areas/game.js",

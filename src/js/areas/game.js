@@ -31,7 +31,8 @@
 				}
 				break;
 			// custom events
-			case "init-view":
+			case "toggle-anim":
+				event.el.toggleClass("anim", event.el.hasClass("anim"));
 				break;
 		}
 	}
