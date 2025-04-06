@@ -7,7 +7,7 @@ class Fighter {
 		this.asset = arena.assets.fighter;
 
 		this.size = 144;
-		this.top = 312;
+		this.top = 310;
 		this.left = 100;
 
 		// animation frames

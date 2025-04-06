@@ -6,8 +6,8 @@ class Player extends Fighter {
 		this.input = {
 			up:    { pressed: false, move: { x: 0, y: 0 } },
 			down:  { pressed: false, move: { x: 0, y: 0 } },
-			left:  { pressed: false, move: { x: -1.25, y: 0 } },
-			right: { pressed: false, move: { x: 1.25, y: 0 } },
+			left:  { pressed: false, move: { x: -1, y: 0 } },
+			right: { pressed: false, move: { x: 1, y: 0 } },
 		};
 	}
 
