@@ -38,6 +38,12 @@ class Fighter {
 				{ x: 144, y: 72, w: 72, h: 72, d: 180 },
 				{ x: 72, y: 72, w: 72, h: 72 },
 			],
+			sweep: [
+				{ x: 0, y: 0, w: 72, h: 72 },
+				{ x: 432, y: 216, w: 72, h: 72, d: 250 },
+				{ x: 504, y: 216, w: 72, h: 72 },
+				{ x: 0, y: 0, w: 72, h: 72 },
+			],
 			backKick: [
 				{ x: 0, y: 0, w: 72, h: 72 },
 				{ x: 288, y: 0, w: 72, h: 72 },
@@ -50,6 +56,16 @@ class Fighter {
 			],
 			teaKick: [
 				{ x: 0, y: 0, w: 72, h: 72 },
+				{ x: 504, y: 72, w: 72, h: 72 },
+				{ x: 576, y: 72, w: 72, h: 72 },
+				{ x: 648, y: 144, w: 72, h: 72, d: 200 },
+				{ x: 648, y: 72, w: 72, h: 72 },
+			],
+			flyKick: [
+				{ x: 0, y: 0, w: 72, h: 72 },
+				{ x: 72, y: 216, w: 72, h: 72 },
+				{ x: 144, y: 216, w: 72, h: 72, d: 220 },
+				{ x: 0, y: 216, w: 72, h: 72, d: 80 },
 			],
 			backFlip: [
 				{ x: 0, y: 144, w: 72, h: 72 },
@@ -62,11 +78,17 @@ class Fighter {
 				{ x: 504, y: 144, w: 72, h: 72 },
 				{ x: 576, y: 144, w: 72, h: 72 },
 			],
+			pantsDrop: [
+				{ x: 0, y: 0, w: 72, h: 72 },
+				{ x: 216, y: 216, w: 72, h: 72, d: 220 },
+				{ x: 288, y: 216, w: 72, h: 72, d: 220 },
+				{ x: 360, y: 216, w: 72, h: 72, d: 220, d: 1e4 },
+			],
 		};
 
 		// animation frames
 		this.frame = {
-			strip: this.strips.teaKick,
+			strip: this.strips.sweep,
 			duration: 150,
 			speed: 150,
 			index: 0,
