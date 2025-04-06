@@ -26,7 +26,7 @@ content {
 
 	.fighter {
 		position: absolute;
-		top: 50px;
+		top: 140px;
 		left: 50px;
 		zoom: 2;
 		image-rendering: pixelated;
@@ -34,11 +34,17 @@ content {
 		background-position: 0 0;
 		width: 70px;
 		height: 64px;
-		// animation: walk 1000ms steps(3) infinite;
+		animation: walk 1000ms steps(3) infinite,
+					back-forth 2500ms linear alternate infinite;
 		// animation: low-kick 900ms steps(2) infinite;
 		// animation: mid-kick 1000ms steps(4) infinite;
-		animation: hi-kick 1100ms steps(4) infinite;
+		// animation: hi-kick 1100ms steps(4) infinite;
 	}
+}
+
+@keyframes back-forth {
+	0%   { left: 20px; }
+	100% { left: 80px; }
 }
 
 @keyframes walk {

@@ -7,7 +7,7 @@
 @import "./modules/test.js"
 
 
-const ik = {
+const karate = {
 	init() {
 		// fast references
 		this.els = {
@@ -24,9 +24,15 @@ const ik = {
 		// DEV-ONLY-END
 	},
 	dispatch(event) {
+		let Self = karate;
 		switch (event.type) {
 			// system events
 			case "window.init":
+				break;
+			case "window.keydown":
+			case "window.keyup":
+				name = Self.els.content.data("show");
+				Self[name].dispatch(event);
 				break;
 			// custom events
 			case "open-help":
@@ -37,4 +43,4 @@ const ik = {
 	game: @import "./areas/game.js",
 };
 
-window.exports = ik;
+window.exports = karate;
