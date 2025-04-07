@@ -25,15 +25,44 @@
 			// system events
 			case "window.keydown":
 				switch (event.char) {
-					case "w":
-					case "up": Player.input.up.pressed = true; break;
-					case "s":
-					case "down": Player.input.down.pressed = true; break;
-					case "a":
-					case "left": Player.input.left.pressed = true; break;
-					case "d":
-					case "right": Player.input.right.pressed = true; break;
-						
+					case "up":
+						Player.input.up.pressed = true;
+						break;
+					case "down":
+						Player.input.down.pressed = true;
+						break;
+					case "left":
+						Player.move("walk");
+						Player.input.left.pressed = true;
+						break;
+					case "right":
+						Player.move("walk");
+						Player.input.right.pressed = true;
+						break;
+					
+					case "z": Player.move("backKick"); break;
+					case "x": Player.move("highKick"); break;
+					case "c": Player.move("midKick"); break;
+					case "v": Player.move("lowKick"); break;
+					case "b": Player.move("flyKick"); break;
+					case "n": Player.move("sweep"); break;
+					case "m": Player.move("teaKick"); break;
+
+					case "q": Player.move("highPunch"); break;
+					case "w": Player.move("midPunch"); break;
+					case "e": Player.move("highBlock"); break;
+					case "r": Player.move("midBlock"); break;
+					case "t": Player.move("headButt"); break;
+					case "y": Player.move("bow"); break;
+
+					case "a": Player.move("backFlip"); break;
+					case "s": Player.move("hiKo"); break;
+					case "d": Player.move("lowKo"); break;
+					case "f": Player.move("faceUp"); break;
+					case "g": Player.move("backUp"); break;
+					case "h": Player.move("jump"); break;
+
+
 					case "p":
 						if (this.arena.fpsControl._stopped) this.arena.fpsControl.start();
 						else this.arena.fpsControl.stop();
@@ -42,14 +71,20 @@
 				break;
 			case "window.keyup":
 				switch (event.char) {
-					case "w":
-					case "up": Player.input.up.pressed = false; break;
-					case "s":
-					case "down": Player.input.down.pressed = false; break;
-					case "a":
-					case "left": Player.input.left.pressed = false; break;
-					case "d":
-					case "right": Player.input.right.pressed = false; break;
+					case "up":
+						Player.input.up.pressed = false;
+						break;
+					case "down":
+						Player.input.down.pressed = false;
+						break;
+					case "left":
+						Player.move("stand");
+						Player.input.left.pressed = false;
+						break;
+					case "right":
+						Player.move("stand");
+						Player.input.right.pressed = false;
+						break;
 				}
 				break;
 			// custom events

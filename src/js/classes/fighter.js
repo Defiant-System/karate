@@ -8,42 +8,51 @@ class Fighter {
 
 		this.size = 144;
 		this.top = 310;
-		this.left = 100;
+		this.left = 540;
 
 		// animation frames
-		this.frame = {
-			sheet: "stand",
+		this.sheet = {
+			name: "stand",
 			strip: Assets.strips.stand,
-			duration: 150,
-			speed: 150,
+			duration: 120,
+			speed: 120,
 			index: 0,
 		};
 	}
 
-	move(sheet) {
-		if (this.frame.sheet === sheet) return;
-		this.frame.sheet = sheet;
-		this.frame.strip = Assets.strips[sheet];
-		this.frame.duration = this.frame.speed;
-		this.frame.index = 0;
+	move(name) {
+		if (this.sheet.name === name) return;
+		this.sheet.name = name;
+		this.sheet.strip = Assets.strips[name];
+		this.sheet.duration = this.sheet.speed;
+		this.sheet.index = 0;
 	}
 
 	update(delta) {
-		let frame = this.frame,
-			{ strip, duration } = frame,
+		let { strip, duration } = this.sheet,
 			len = strip.length;
-		frame.duration -= delta;
-		if (frame.duration < 0) {
-			frame.duration = (frame.duration + frame.speed) % frame.speed;
-			frame.index++;
-			if (frame.index > len-1) frame.index = 0;
-			if (strip[frame.index].d) frame.duration = strip[frame.index].d;
+		this.sheet.duration -= delta;
+		if (this.sheet.duration < 0) {
+			this.sheet.duration = (this.sheet.duration + this.sheet.speed) % this.sheet.speed;
+			this.sheet.index++;
+
+			if (this.sheet.index > len-1) {
+				if (!["stand", "walk"].includes(this.sheet.name)) {
+					this.move("stand");
+				}
+				this.sheet.index = 0;
+			}
+
+			let frame = strip[this.sheet.index];
+			if (frame.dx !== undefined) this.left += frame.dx;
+			
+			if (frame.d) this.sheet.duration = frame.d;
 		}
 	}
 
 	render(ctx) {
-		let frame = this.frame,
-			{ x, y, w, h } = frame.strip[frame.index];
+		let sheet = this.sheet,
+			{ x, y, w, h } = sheet.strip[sheet.index];
 		// console.log(x, y, w, h );
 		ctx.drawImage(this.asset.img, x, y, w, h, this.left, this.top, this.size, this.size);
 	}

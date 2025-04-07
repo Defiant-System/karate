@@ -4,8 +4,8 @@ class Player extends Fighter {
 		super(cfg);
 
 		this.input = {
-			up:    { pressed: false, move: { x: 0, y: 0 } },
-			down:  { pressed: false, move: { x: 0, y: 0 } },
+			up:    { pressed: false, move: { x: 0, y: 1 } },
+			down:  { pressed: false, move: { x: 0, y: -1 } },
 			left:  { pressed: false, move: { x: -1, y: 0 } },
 			right: { pressed: false, move: { x: 1, y: 0 } },
 		};
@@ -22,14 +22,14 @@ class Player extends Fighter {
 			}
 		}
 
-		this.top += move.y;
+		// this.top += move.y;
 		this.left += move.x;
 
-		if (move.x === 0) {
-			this.move("stand");
-		} else {
-			this.move("walk");
-		}
+		// if (move.y > 0) this.move("jump");
+		// else if (move.y < 0) this.move("sweep");
+		// else 
+		// if (move.x === 0) this.move("stand");
+		// else this.move("walk");
 
 		super.update(delta);
 	}
