@@ -46,6 +46,7 @@ class Fighter {
 
 			let frame = strip[this.sheet.index];
 			if (frame.dx !== undefined) this.left += (frame.dx * this.flip);
+			if (frame.dy !== undefined) this.top += frame.dy;
 			if (frame.d) this.sheet.duration = frame.d;
 			if (frame.flip) this.flip *= -1;
 		}
