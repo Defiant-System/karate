@@ -47,6 +47,9 @@ class Arena {
 	ready() {
 		// add temp fighter(s)
 		this.player = new Player({ arena: this });
+		// adding opponent
+		this.entities.push(new AI({ arena: this }));
+		// adding player
 		this.entities.push(this.player);
 	}
 

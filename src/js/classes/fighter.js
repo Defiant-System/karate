@@ -8,7 +8,7 @@ class Fighter {
 
 		this.size = 144;
 		this.top = 310;
-		this.left = 400;
+		this.left = 100;
 		this.flip = 1;
 
 		// animation frames

@@ -3,6 +3,8 @@ class Player extends Fighter {
 	constructor(cfg) {
 		super(cfg);
 
+		this.left = 270;
+
 		this.input = {
 			up:    { pressed: false, move: { x: 0, y: 1 } },
 			down:  { pressed: false, move: { x: 0, y: -1 } },
