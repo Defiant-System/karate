@@ -2,9 +2,6 @@
 class AI extends Fighter {
 	constructor(cfg) {
 		super(cfg);
-		
-		this.left = 400;
-		this.flip = -1;
 	}
 
 	update(delta) {

@@ -1,15 +1,15 @@
 
 class Fighter {
 	constructor(cfg) {
-		let { arena } = cfg;
+		let { arena, left, flip } = cfg;
 
 		this.arena = arena;
 		this.asset = arena.assets.fighter;
 
 		this.size = 144;
 		this.top = 310;
-		this.left = 100;
-		this.flip = 1;
+		this.left = left || 100;
+		this.flip = flip || -1;
 
 		// animation frames
 		this.sheet = {

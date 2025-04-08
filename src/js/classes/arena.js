@@ -46,9 +46,10 @@ class Arena {
 
 	ready() {
 		// add temp fighter(s)
-		this.player = new Player({ arena: this });
+		this.player = new Player({ arena: this, left: 120, flip: 1 });
 		// adding opponent
-		this.entities.push(new AI({ arena: this }));
+		this.entities.push(new AI({ arena: this, left: 400 }));
+		this.entities.push(new AI({ arena: this, left: 550 }));
 		// adding player
 		this.entities.push(this.player);
 	}
