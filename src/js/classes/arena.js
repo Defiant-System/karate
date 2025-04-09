@@ -46,10 +46,10 @@ class Arena {
 
 	ready() {
 		// add temp fighter(s)
-		this.player = new Player({ arena: this, left: 120, flip: 1 });
+		this.player = new Player({ arena: this, colors: [[255,255,255],[145,145,145],[218,0,0]], left: 120, flip: 1 });
 		// adding opponent
-		this.entities.push(new AI({ arena: this, left: 400 }));
-		this.entities.push(new AI({ arena: this, left: 550 }));
+		this.entities.push(new AI({ arena: this, colors: [[218,0,0],[109,0,0],[238,102,238]], left: 400 }));
+		this.entities.push(new AI({ arena: this, colors: [[0,0,255],[0,0,109],[218,218,0]], left: 550 }));
 		// adding player
 		this.entities.push(this.player);
 	}

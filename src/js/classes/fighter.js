@@ -1,10 +1,38 @@
 
 class Fighter {
 	constructor(cfg) {
-		let { arena, left, flip } = cfg;
+		let { arena, left, flip, colors } = cfg,
+			// fighter color palette
+			palette = [[218,218,218],[145,145,145],[218,0,0]];
 
 		this.arena = arena;
-		this.asset = arena.assets.fighter;
+		this.asset = { ...arena.assets.fighter };
+
+		let { width, height } = this.asset.item,
+			{ cvs, ctx } = Utils.createCanvas(width, height);
+		this.asset.cvs = cvs[0];
+		this.asset.ctx = ctx;
+
+		// repaints sprite for fighter
+		ctx.drawImage(this.asset.img, 0, 0);
+		let pixels = ctx.getImageData(0, 0, width, height);
+		let data = pixels.data;
+		for (let i=0; i<data.length; i+=4) {
+			let r = data[i + 0],
+				g = data[i + 1],
+				b = data[i + 2],
+				len = 3;
+			while (len--) {
+				if (palette[len][0] === r && palette[len][1] === g && palette[len][2] === b) {
+					[r,g,b] = colors[len];
+				}
+			}
+			data[i + 0] = r;
+			data[i + 1] = g;
+			data[i + 2] = b;
+		}
+		ctx.putImageData(pixels, 0, 0);
+
 
 		this.size = 144;
 		this.top = 310;
@@ -62,10 +90,10 @@ class Fighter {
 		if (this.flip < 0) {
 			ctx.translate(this.left+sw, 0);
 			ctx.scale(-1, 1);
-			ctx.drawImage(this.asset.img, x, y, w, h, 0, this.top, sw, sh);
+			ctx.drawImage(this.asset.cvs, x, y, w, h, 0, this.top, sw, sh);
 			ctx.setTransform(1,0,0,1,0,0);
 		} else {
-			ctx.drawImage(this.asset.img, x, y, w, h, this.left, this.top, sw, sh);
+			ctx.drawImage(this.asset.cvs, x, y, w, h, this.left, this.top, sw, sh);
 		}
 		ctx.restore();
 	}

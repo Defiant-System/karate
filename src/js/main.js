@@ -5,6 +5,7 @@
 @import "./classes/ai.js"
 
 @import "./modules/assets.js"
+@import "./modules/utils.js"
 @import "./modules/test.js"
 
 
