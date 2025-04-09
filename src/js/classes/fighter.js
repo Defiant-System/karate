@@ -42,7 +42,7 @@ class Fighter {
 		// animation frames
 		this.sheet = {
 			name: "stand",
-			strip: Assets.strips.stand,
+			strip: Assets.anim.stand.strip,
 			duration: 120,
 			speed: 120,
 			index: 0,
@@ -52,7 +52,7 @@ class Fighter {
 	move(name) {
 		if (this.sheet.name === name) return;
 		this.sheet.name = name;
-		this.sheet.strip = Assets.strips[name];
+		this.sheet.strip = Assets.anim[name].strip;
 		this.sheet.duration = this.sheet.speed;
 		this.sheet.index = 0;
 	}
