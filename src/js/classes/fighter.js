@@ -43,8 +43,8 @@ class Fighter {
 		this.sheet = {
 			name: "stand",
 			strip: Assets.anim.stand.strip,
-			duration: 120,
-			speed: 120,
+			duration: 720,
+			speed: 720,
 			index: 0,
 		};
 	}
