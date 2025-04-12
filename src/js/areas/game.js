@@ -58,9 +58,8 @@
 					case "a": Player.move("backFlip"); break;
 					case "s": Player.move("hiKo"); break;
 					case "d": Player.move("lowKo"); break;
-					case "f": Player.move("faceUp"); break;
-					case "g": Player.move("backUp"); break;
-					case "h": Player.move("jump"); break;
+					case "f": Player.move("midKo"); break;
+					case "g": Player.move("jump"); break;
 
 
 					case "p":
