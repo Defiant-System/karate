@@ -40,27 +40,26 @@
 						Player.input.right.pressed = true;
 						break;
 					
-					case "z": Player.move("backKick"); break;
-					case "x": Player.move("highKick"); break;
-					case "c": Player.move("midKick"); break;
-					case "v": Player.move("lowKick"); break;
-					case "b": Player.move("flyKick"); break;
-					case "n": Player.move("sweep"); break;
-					case "m": Player.move("teaKick"); break;
+					case "z": Player.move("backKick", event.char); break;
+					case "x": Player.move("highKick", event.char); break;
+					case "c": Player.move("midKick", event.char); break;
+					case "v": Player.move("lowKick", event.char); break;
+					case "b": Player.move("flyKick", event.char); break;
+					case "n": Player.move("sweep", event.char); break;
+					case "m": Player.move("teaKick", event.char); break;
 
-					case "q": Player.move("highPunch"); break;
-					case "w": Player.move("midPunch"); break;
-					case "e": Player.move("highBlock"); break;
-					case "r": Player.move("midBlock"); break;
-					case "t": Player.move("headButt"); break;
-					case "y": Player.move("bow"); break;
+					case "q": Player.move("highPunch", event.char); break;
+					case "w": Player.move("midPunch", event.char); break;
+					case "e": Player.move("highBlock", event.char); break;
+					case "r": Player.move("midBlock", event.char); break;
+					case "t": Player.move("headButt", event.char); break;
+					case "y": Player.move("bow", event.char); break;
 
-					case "a": Player.move("backFlip"); break;
-					case "s": Player.move("hiKo"); break;
-					case "d": Player.move("lowKo"); break;
-					case "f": Player.move("midKo"); break;
-					case "g": Player.move("jump"); break;
-
+					case "a": Player.move("backFlip", event.char); break;
+					case "s": Player.move("hiKo", event.char); break;
+					case "d": Player.move("lowKo", event.char); break;
+					case "f": Player.move("midKo", event.char); break;
+					case "g": Player.move("jump", event.char); break;
 
 					case "p":
 						if (this.arena.fpsControl._stopped) this.arena.fpsControl.start();
@@ -84,6 +83,8 @@
 						Player.move("stand");
 						Player.input.right.pressed = false;
 						break;
+					default:
+						Player.keyUp(event.char);
 				}
 				break;
 			// custom events

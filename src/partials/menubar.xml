@@ -12,6 +12,9 @@
 			<Menu name="Egypt" click="set-bg" arg="bg-03.webp"/>
 			<Menu name="Paris" click="set-bg" arg="bg-04.jpg"/>
 		</Menu>
+		<Menu type="divider"/>
+		<Menu name="Slow" click="set-speed" arg="700"/>
+		<Menu name="Fast" click="set-speed" arg="120"/>
 	</Menu>
 	<Menu name="Help">
 		<Menu name="Help" click="open-help"/>

@@ -43,8 +43,8 @@ class Fighter {
 		this.sheet = {
 			name: "stand",
 			strip: Assets.anim.stand.strip,
-			duration: 120,
-			speed: 120,
+			duration: arena.speed,
+			speed: arena.speed,
 			index: 0,
 		};
 	}
@@ -52,9 +52,21 @@ class Fighter {
 	move(name) {
 		if (this.sheet.name === name) return;
 		this.sheet.name = name;
-		this.sheet.strip = Assets.anim[name].strip;
-		this.sheet.duration = this.sheet.speed;
+		this.sheet.strip = [...Assets.anim[name].strip];
+		this.sheet.strip.map(f => {
+			if (!!f.d) {
+				f.d = (f.d / 120) * this.arena.speed;
+			}
+		});
+		this.sheet.w8l = false;
+		this.sheet.wait = true;
+		this.sheet.speed = this.arena.speed;
+		this.sheet.duration = this.arena.speed;
 		this.sheet.index = 0;
+	}
+
+	keyUp(char) {
+		this.sheet.wait = false;
 	}
 
 	update(delta) {
@@ -63,7 +75,7 @@ class Fighter {
 		this.sheet.duration -= delta;
 		if (this.sheet.duration < 0) {
 			this.sheet.duration = (this.sheet.duration + this.sheet.speed) % this.sheet.speed;
-			this.sheet.index++;
+			if (!this.sheet.wait || !strip[this.sheet.index].wait) this.sheet.index++;
 
 			if (this.sheet.index > len-1) {
 				if (!["stand", "walk"].includes(this.sheet.name)) {
@@ -73,7 +85,10 @@ class Fighter {
 			}
 
 			let frame = strip[this.sheet.index];
-			if (frame.dx !== undefined) this.left += (frame.dx * this.flip);
+			if (frame.dx !== undefined && (!this.sheet.wait || !this.sheet.w8l)) {
+				this.sheet.w8l = true;
+				this.left += (frame.dx * this.flip);
+			}
 			if (frame.dy !== undefined) this.top += frame.dy;
 			if (frame.d) this.sheet.duration = frame.d;
 			if (frame.flip) this.flip *= -1;

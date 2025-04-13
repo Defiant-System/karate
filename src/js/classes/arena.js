@@ -13,6 +13,8 @@ class Arena {
 		// items on the map
 		this.entities = [];
 
+		this._speed = 120;
+
 		// create FPS controller
 		let Self = this;
 		this.fpsControl = karaqu.FpsControl({
@@ -42,6 +44,14 @@ class Arena {
 		
 		// load assets
 		loadAssets();
+	}
+
+	get speed() {
+		return this._speed;
+	}
+
+	set speed(v) {
+		this._speed = v;
 	}
 
 	ready() {
@@ -75,11 +85,11 @@ class Arena {
 		// ctx.translate(this.width - 119, 45);
 		ctx.translate(3, 0);
 		// draw box
-		ctx.fillStyle = "#0009";
+		ctx.fillStyle = "#99f5";
 		ctx.fillRect(5, 5, 100, 40);
 		ctx.fillStyle = "#fff8";
 		ctx.fillRect(7, 7, 96, 11);
-		ctx.fillStyle = "#fff7";
+		ctx.fillStyle = "#f997";
 		// loop log
 		for (let i=0; i<96; i++) {
 			let bar = fps[i];

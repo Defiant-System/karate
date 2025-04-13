@@ -47,6 +47,10 @@ const karate = {
 					"--img": `url('~/gfx/${event.arg}')`
 				});
 				break;
+			case "set-speed":
+				Self.game.arena.speed = +event.arg;
+				console.log(Self.game.arena.speed);
+				break;
 			// proxy event
 			default:
 				el = event.el;
