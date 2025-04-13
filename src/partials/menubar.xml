@@ -4,6 +4,15 @@
 		<Menu type="divider"/>
 		<Menu name="Quit Karate Plus" shell="win -c"/>
 	</Menu>
+	<Menu name="Game" for="game-content">
+		<Menu name="Backgrounds&#8230;">
+			<Menu name="Original" click="set-bg" arg="bg-01.png"/>
+			<Menu type="divider"/>
+			<Menu name="Japan" click="set-bg" arg="bg-02.webp"/>
+			<Menu name="Egypt" click="set-bg" arg="bg-03.webp"/>
+			<Menu name="Paris" click="set-bg" arg="bg-04.jpg"/>
+		</Menu>
+	</Menu>
 	<Menu name="Help">
 		<Menu name="Help" click="open-help"/>
 		<Menu type="divider"/>
