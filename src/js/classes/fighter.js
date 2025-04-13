@@ -40,24 +40,18 @@ class Fighter {
 		this.flip = flip || -1;
 
 		// animation frames
-		this.sheet = {
-			name: "stand",
-			strip: Assets.anim.stand.strip,
-			duration: arena.speed,
-			speed: arena.speed,
-			index: 0,
-		};
+		this.sheet = {};
+		// default stance
+		this.move("stance");
 	}
 
 	move(name) {
 		if (this.sheet.name === name) return;
 		this.sheet.name = name;
-		this.sheet.strip = [...Assets.anim[name].strip];
-		this.sheet.strip.map(f => {
-			if (!!f.d) {
-				f.d = (f.d / 120) * this.arena.speed;
-			}
-		});
+		this.sheet.hit = [...Assets.fighter[name].hit];
+		this.sheet.hurt = [...Assets.fighter[name].hurt];
+		this.sheet.strip = [...Assets.fighter[name].strip];
+		this.sheet.strip.filter(f => !!f.d).map(f => f.d = (f.d / 120) * this.arena.speed);
 		this.sheet.w8l = false;
 		this.sheet.wait = true;
 		this.sheet.speed = this.arena.speed;
@@ -78,8 +72,8 @@ class Fighter {
 			if (!this.sheet.wait || !strip[this.sheet.index].wait) this.sheet.index++;
 
 			if (this.sheet.index > len-1) {
-				if (!["stand", "walk"].includes(this.sheet.name)) {
-					this.move("stand");
+				if (!["stance", "walk"].includes(this.sheet.name)) {
+					this.move("stance");
 				}
 				this.sheet.index = 0;
 			}
@@ -103,13 +97,34 @@ class Fighter {
 		// console.log(x, y, w, h );
 		ctx.save();
 		if (this.flip < 0) {
-			ctx.translate(this.left+sw, 0);
+			ctx.translate(this.left+sw, this.top);
 			ctx.scale(-1, 1);
-			ctx.drawImage(this.asset.cvs, x, y, w, h, 0, this.top, sw, sh);
+			ctx.drawImage(this.asset.cvs, x, y, w, h, 0, 0, sw, sh);
+			// render hit/hurt boxes
+			this.renderHitHurt(ctx);
 			ctx.setTransform(1,0,0,1,0,0);
 		} else {
-			ctx.drawImage(this.asset.cvs, x, y, w, h, this.left, this.top, sw, sh);
+			ctx.translate(this.left, this.top);
+			ctx.drawImage(this.asset.cvs, x, y, w, h, 0, 0, sw, sh);
+			// render hit/hurt boxes
+			this.renderHitHurt(ctx);
 		}
 		ctx.restore();
+	}
+
+	renderHitHurt(ctx) {
+		// hitboxes
+		ctx.fillStyle = "#5c57";
+		this.sheet.hurt.map(disc => {
+			ctx.beginPath();
+			ctx.arc(disc.x, disc.y, disc.r, 0, Math.TAU);
+			ctx.fill();
+		});
+		ctx.fillStyle = "#5f57";
+		this.sheet.hit.map(disc => {
+			ctx.beginPath();
+			ctx.arc(disc.x, disc.y, disc.r, 0, Math.TAU);
+			ctx.fill();
+		});
 	}
 }

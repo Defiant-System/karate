@@ -76,11 +76,11 @@
 						Player.input.down.pressed = false;
 						break;
 					case "left":
-						Player.move("stand");
+						Player.move("stance");
 						Player.input.left.pressed = false;
 						break;
 					case "right":
-						Player.move("stand");
+						Player.move("stance");
 						Player.input.right.pressed = false;
 						break;
 					default:

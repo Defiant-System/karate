@@ -13,7 +13,9 @@ class Arena {
 		// items on the map
 		this.entities = [];
 
+		// config
 		this._speed = 120;
+		this._hitHurt = true;
 
 		// create FPS controller
 		let Self = this;

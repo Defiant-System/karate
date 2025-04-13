@@ -3,8 +3,10 @@ let Assets = {
 	sprites: [
 		{ id: "fighter", width: 720, height: 720, src: "~/gfx/sprite.png" },
 	],
-	anim: {
+	fighter: {
 		headButt: {
+			hit: [],
+			hurt: [],
 			strip: [
 				{ x: 0, y: 432, w: 72, h: 72 },
 				{ x: 144, y: 432, w: 72, h: 72, d: 200, wait: true },
@@ -12,17 +14,22 @@ let Assets = {
 			]
 		},
 		backKick: {
+			hit: [],
+			hurt: [],
 			strip: [
-				{ x: 360, y: 0, w: 72, h: 72 },
-				{ x: 432, y: 0, w: 72, h: 72, dx: -21 },
+				{ x: 0, y: 0, w: 72, h: 72, d: 10 },
+				{ x: 360, y: 0, w: 72, h: 72, dx: -7 },
+				{ x: 432, y: 0, w: 72, h: 72, dx: -17 },
 				{ x: 504, y: 0, w: 72, h: 72, dx: -13 },
-				{ x: 576, y: 0, w: 72, h: 72 },
+				{ x: 576, y: 0, w: 72, h: 72, dx: -7 },
 				{ x: 648, y: 0, w: 72, h: 72, dx: -7, d: 300, wait: true },
 				{ x: 576, y: 0, w: 72, h: 72 },
 				{ x: 0, y: 0, w: 72, h: 72, dx: -31, flip: true },
 			]
 		},
 		flyKick: {
+			hit: [],
+			hurt: [],
 			strip: [
 				{ x: 648, y: 432, w: 72, h: 72 },
 				{ x: 72, y: 216, w: 72, h: 72, dx: 15, dy: -11 },
@@ -32,6 +39,8 @@ let Assets = {
 			]
 		},
 		teaKick: {
+			hit: [],
+			hurt: [],
 			strip: [
 				{ x: 504, y: 72, w: 72, h: 72 },
 				{ x: 576, y: 72, w: 72, h: 72, dy: -2 },
@@ -41,6 +50,8 @@ let Assets = {
 			]
 		},
 		highKick: {
+			hit: [],
+			hurt: [],
 			strip: [
 				{ x: 72, y: 72, w: 72, h: 72 },
 				{ x: 360, y: 72, w: 72, h: 72, dx: -5 },
@@ -49,6 +60,8 @@ let Assets = {
 			]
 		},
 		midKick: {
+			hit: [],
+			hurt: [],
 			strip: [
 				{ x: 72, y: 72, w: 72, h: 72 },
 				{ x: 216, y: 72, w: 72, h: 72, dx: -5 },
@@ -58,6 +71,8 @@ let Assets = {
 			]
 		},
 		lowKick: {
+			hit: [],
+			hurt: [],
 			strip: [
 				{ x: 72, y: 72, w: 72, h: 72 },
 				{ x: 144, y: 72, w: 72, h: 72, dx: 17, d: 150, wait: true },
@@ -65,6 +80,8 @@ let Assets = {
 			]
 		},
 		backFlip: {
+			hit: [],
+			hurt: [],
 			strip: [
 				{ x: 72, y: 144, w: 72, h: 72, dx: -2 },
 				{ x: 144, y: 144, w: 72, h: 72, dx: -5 },
@@ -78,6 +95,8 @@ let Assets = {
 			]
 		},
 		flip: {
+			hit: [],
+			hurt: [],
 			strip: [
 				{ x: 0, y: 0, w: 72, h: 72 },
 				{ x: 504, y: 432, w: 72, h: 72 },
@@ -85,6 +104,8 @@ let Assets = {
 			]
 		},
 		sweep: {
+			hit: [],
+			hurt: [],
 			strip: [
 				{ x: 504, y: 216, w: 72, h: 72 },
 				{ x: 432, y: 216, w: 72, h: 72, d: 150, wait: true },
@@ -92,6 +113,8 @@ let Assets = {
 			]
 		},
 		highPunch: {
+			hit: [],
+			hurt: [],
 			strip: [
 				{ x: 432, y: 432, w: 72, h: 72 },
 				{ x: 216, y: 432, w: 72, h: 72, wait: true },
@@ -99,6 +122,8 @@ let Assets = {
 			]
 		},
 		midPunch: {
+			hit: [],
+			hurt: [],
 			strip: [
 				{ x: 288, y: 432, w: 72, h: 72 },
 				{ x: 360, y: 432, w: 72, h: 72, dx: 11, wait: true },
@@ -106,6 +131,8 @@ let Assets = {
 			]
 		},
 		hiKo: {
+			hit: [],
+			hurt: [],
 			strip: [
 				{ x: 0, y: 0, w: 72, h: 72, d: 60 },
 				{ x: 0, y: 288, w: 72, h: 72, dx: -31, dy: -6 },
@@ -120,6 +147,8 @@ let Assets = {
 			]
 		},
 		midKo: {
+			hit: [],
+			hurt: [],
 			strip: [
 				{ x: 0, y: 0, w: 72, h: 72, d: 20 },
 				{ x: 288, y: 288, w: 72, h: 72, dx: -29 },
@@ -131,6 +160,8 @@ let Assets = {
 			]
 		},
 		lowKo: {
+			hit: [],
+			hurt: [],
 			strip: [
 				{ x: 576, y: 216, w: 72, h: 72 },
 				{ x: 648, y: 216, w: 72, h: 72 },
@@ -142,6 +173,8 @@ let Assets = {
 			]
 		},
 		jump: {
+			hit: [],
+			hurt: [],
 			strip: [
 				{ x: 72, y: 216, w: 72, h: 72, dy: -4 },
 				{ x: 72, y: 216, w: 72, h: 72, dy: -7 },
@@ -150,16 +183,22 @@ let Assets = {
 			]
 		},
 		highBlock: {
+			hit: [],
+			hurt: [],
 			strip: [
 				{ x: 648, y: 360, w: 72, h: 72, wait: true },
 			]
 		},
 		midBlock: {
+			hit: [],
+			hurt: [],
 			strip: [
 				{ x: 432, y: 432, w: 72, h: 72, wait: true },
 			]
 		},
 		bow: {
+			hit: [],
+			hurt: [],
 			strip: [
 				{ x: 504, y: 360, w: 72, h: 72, d: 200 },
 				{ x: 576, y: 360, w: 72, h: 72, d: 500 },
@@ -167,6 +206,8 @@ let Assets = {
 			]
 		},
 		walk: {
+			hit: [],
+			hurt: [],
 			strip: [
 				{ x: 0, y: 0, w: 72, h: 72 },
 				{ x: 72, y: 0, w: 72, h: 72 },
@@ -176,15 +217,17 @@ let Assets = {
 				{ x: 72, y: 0, w: 72, h: 72 },
 			]
 		},
-		stand: {
+		stance: {
+			hit: [],
+			hurt: [{ x: 65, y: 50, r: 15 }, { x: 47, y: 85, r: 11 }, { x: 77, y: 85, r: 12 }, { x: 45, y: 116, r: 12 }, { x: 94, y: 118, r: 11 }, { x: 34, y: 133, r: 10 }, { x: 108, y: 133, r: 10 }],
 			strip: [
 				{ x: 0, y: 0, w: 72, h: 72 },
-				{ x: 0, y: 0, w: 72, h: 72, d: 4e4 },
-				// pants drops after 10s
-				{ x: 216, y: 216, w: 72, h: 72 },
-				{ x: 288, y: 216, w: 72, h: 72, d: 200 },
-				{ x: 360, y: 216, w: 72, h: 72, d: 4e3 },
-				{ x: 288, y: 216, w: 72, h: 72, d: 200 },
+				// { x: 0, y: 0, w: 72, h: 72, d: 4e4 },
+				// // pants drops after 10s
+				// { x: 216, y: 216, w: 72, h: 72 },
+				// { x: 288, y: 216, w: 72, h: 72, d: 200 },
+				// { x: 360, y: 216, w: 72, h: 72, d: 4e3 },
+				// { x: 288, y: 216, w: 72, h: 72, d: 200 },
 			]
 		}
 	}

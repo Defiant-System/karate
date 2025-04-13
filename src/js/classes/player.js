@@ -28,7 +28,7 @@ class Player extends Fighter {
 		// if (move.y > 0) this.move("jump");
 		// else if (move.y < 0) this.move("sweep");
 		// else 
-		// if (move.x === 0) this.move("stand");
+		// if (move.x === 0) this.move("stance");
 		// else this.move("walk");
 
 		super.update(delta);
