@@ -72,7 +72,8 @@ class Arena {
 	drawFps(ctx) {
 		let fps = this.fpsControl ? this.fpsControl._log : [];
 		ctx.save();
-		ctx.translate(this.width - 119, 45);
+		// ctx.translate(this.width - 119, 45);
+		ctx.translate(3, 0);
 		// draw box
 		ctx.fillStyle = "#0009";
 		ctx.fillRect(5, 5, 100, 40);
