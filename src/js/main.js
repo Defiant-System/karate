@@ -42,6 +42,9 @@ const karate = {
 			case "open-help":
 				karaqu.shell("fs -u '~/help/index.md'");
 				break;
+			case "open-editor":
+				window.open("editor");
+				break;
 			case "set-bg":
 				Self.els.content.find(".game-view").css({
 					"--img": `url('~/gfx/${event.arg}')`

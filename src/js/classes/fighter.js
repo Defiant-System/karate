@@ -101,13 +101,13 @@ class Fighter {
 			ctx.scale(-1, 1);
 			ctx.drawImage(this.asset.cvs, x, y, w, h, 0, 0, sw, sh);
 			// render hit/hurt boxes
-			this.renderHitHurt(ctx);
+			if (this.arena._showHitHurt) this.renderHitHurt(ctx);
 			ctx.setTransform(1,0,0,1,0,0);
 		} else {
 			ctx.translate(this.left, this.top);
 			ctx.drawImage(this.asset.cvs, x, y, w, h, 0, 0, sw, sh);
 			// render hit/hurt boxes
-			this.renderHitHurt(ctx);
+			if (this.arena._showHitHurt) this.renderHitHurt(ctx);
 		}
 		ctx.restore();
 	}
