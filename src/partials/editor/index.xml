@@ -1,7 +1,7 @@
 <Spawn id="editor">
 	<Head>
 		<meta name="title" value="Sprite Editor"/>
-		<meta name="width" value="512"/>
+		<meta name="width" value="800"/>
 		<meta name="height" value="420"/>
 		<meta name="top" value="620"/>
 		<meta name="left" value="120"/>

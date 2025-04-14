@@ -8,11 +8,6 @@
 				<Tool name="8px" click="grid-size" arg=".25"/>
 				<Tool name="32px" click="grid-size" arg="1"/>
 			</Options>
-			<Options type="grouped">
-				<Tool name="Eraser" click="cursor-eraser"/>
-				<Tool name="Overflow" click="toggle-overflow"/>
-				<Tool name="Grid" click="toggle-grid"/>
-			</Options>
 		</Group>
 	</ToolSet>
 </ToolBar>
