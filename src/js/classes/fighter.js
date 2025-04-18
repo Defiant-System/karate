@@ -99,12 +99,18 @@ class Fighter {
 		if (this.flip < 0) {
 			ctx.translate(this.left+sw, this.top);
 			ctx.scale(-1, 1);
+			// ctx.fillStyle = "#fffa";
+			// ctx.rect(0, 0, sw, sh);
+			// ctx.fill();
 			ctx.drawImage(this.asset.cvs, x, y, w, h, 0, 0, sw, sh);
 			// render hit/hurt boxes
 			if (this.arena._showHitHurt) this.renderHitHurt(ctx);
 			ctx.setTransform(1,0,0,1,0,0);
 		} else {
 			ctx.translate(this.left, this.top);
+			// ctx.fillStyle = "#fffa";
+			// ctx.rect(0, 0, sw, sh);
+			// ctx.fill();
 			ctx.drawImage(this.asset.cvs, x, y, w, h, 0, 0, sw, sh);
 			// render hit/hurt boxes
 			if (this.arena._showHitHurt) this.renderHitHurt(ctx);
@@ -114,17 +120,17 @@ class Fighter {
 
 	renderHitHurt(ctx) {
 		// hitboxes
-		ctx.fillStyle = "#5c57";
+		ctx.fillStyle = "#5f5a";
 		this.sheet.hurt.map(disc => {
 			ctx.beginPath();
 			ctx.arc(disc.x, disc.y, disc.r, 0, Math.TAU);
 			ctx.fill();
 		});
-		ctx.fillStyle = "#5f57";
-		this.sheet.hit.map(disc => {
-			ctx.beginPath();
-			ctx.arc(disc.x, disc.y, disc.r, 0, Math.TAU);
-			ctx.fill();
-		});
+		// ctx.fillStyle = "#f55a";
+		// this.sheet.hit.map(disc => {
+		// 	ctx.beginPath();
+		// 	ctx.arc(disc.x, disc.y, disc.r, 0, Math.TAU);
+		// 	ctx.fill();
+		// });
 	}
 }

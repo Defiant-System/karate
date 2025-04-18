@@ -4,7 +4,7 @@ let Test = {
 		// auto stop Arena FPS control
 		setTimeout(() => APP.game.arena.fpsControl.stop(), 1e3);
 
-		setTimeout(() => window.open("editor"), 1e3);
+		setTimeout(() => window.open("editor"), 300);
 
 		// backFlip backKick teaKick highKick midKick lowKick flyKick
 		// setTimeout(() => APP.game.arena.player.move("backKick"), 1e3);

@@ -29,6 +29,9 @@ const karate = {
 		let Self = karate,
 			name,
 			el;
+		// proxy editor (spawn) events
+		if (event.spawn) return Self.editor.dispatch(event);
+		// console.log(event.type);
 		switch (event.type) {
 			// system events
 			case "window.init":
@@ -68,6 +71,7 @@ const karate = {
 		}
 	},
 	game: @import "./areas/game.js",
+	editor: @import "./areas/editor.js",
 };
 
 window.exports = karate;

@@ -7,47 +7,95 @@
 	bottom: 0;
 	display: flex;
 
-	.left {
+	.tree {
 		background: #f2f2f2;
 		width: 160px;
-	}
+		font-size: 0;
 
-	.work {
-		background: #aaa;
-		flex: 1;
-		position: relative;
-		border-left: 1px solid #777a;
-		border-right: 1px solid #777a;
+		.item {
+			> i {
+				background: 50% 50% no-repeat;
+				background-size: 17px 17px;
+				vertical-align: top;
+				display: inline-block;
+				width: 17px;
+				height: 17px;
+				margin: 1px 0;
 
-		.canvas {
-			background-image: conic-gradient(#ccc 0 25%,#eee 25% 50%,#ccc 50% 75%,#eee 75% 100%);
-			background-size: 8px 8px;
-			position: absolute;
-			top: 62px;
-			left: 98px;
-			width: 288px;
-			height: 288px;
-			box-shadow: 0 0 0 1px #0002,
-						0 1px 9px #0005;
+				&.icon-blank { }
+				&.icon-arrow { background-image: url(~/icons/icon-arrow.png); background-size: 8px 8px; }
+				&.icon-folder { background-image: url(~/icons/icon-folder.png); opacity: .5; }
+				&.icon-frame { background-image: url(~/icons/icon-frame.png); opacity: .5; }
+			}
 
-			&:before {
-				content: "";
-				position: absolute;
-				top: 0;
-				left: 0;
-				right: 0;
-				bottom: 0;
-				filter: drop-shadow(0 1px 5px #0003);
-				image-rendering: pixelated;
-				background: url(~/gfx/sprite.png) no-repeat;
-				background-size: 2880px auto;
-				background-position: 0 0;
+			span {
+				// background: #0002;
+				vertical-align: top;
+				display: inline-block;
+				font-size: 13px;
+				margin: 2px 0 0 1px;
+				padding: 2px;
+			}
+
+			.children {
+				padding-left: 8px;
 			}
 		}
 	}
 
 	.right {
-		width: 160px;
-		background: #ddd;
+		position: relative;
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		border-left: 1px solid #777a;
+
+		.frame {
+			background: #aaa;
+			flex: 1;
+			position: relative;
+
+			.canvas {
+				background-image: conic-gradient(#ccc 0 25%,#eee 25% 50%,#ccc 50% 75%,#eee 75% 100%);
+				background-size: 8px 8px;
+				position: absolute;
+				top: 22px;
+				left: 168px;
+				width: 288px;
+				height: 288px;
+				box-shadow: 0 0 0 1px #0002,
+							0 1px 9px #0005;
+
+				&:before {
+					content: "";
+					position: absolute;
+					top: 0;
+					left: 0;
+					right: 0;
+					bottom: 0;
+					filter: drop-shadow(0 1px 5px #0003);
+					image-rendering: pixelated;
+					background: url(~/gfx/sprite.png) no-repeat;
+					background-size: 2880px auto;
+					background-position: 0 0;
+				}
+
+				span {
+					background: #2927;
+					position: absolute;
+					top: calc( calc( var(--y) * 2px ) - calc( var(--r) * 2px ) );
+					left: calc( calc( var(--x) * 2px ) - calc( var(--r) * 2px ) );
+					width: calc( var(--r) * 4px );
+					height: calc( var(--r) * 4px );
+					border-radius: 50%;
+				}
+			}
+		}
+
+		.strip {
+			height: 90px;
+			background: #ddd;
+			border-top: 1px solid #777a;
+		}
 	}
 }
