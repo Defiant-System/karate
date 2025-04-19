@@ -18,6 +18,7 @@
 			case "spawn.open":
 				// fast references
 				Self.els.layout = Spawn.find(`.layout`);
+				Self.els.tree = Spawn.find(`.tree`);
 				Self.els.right = Spawn.find(`.right`);
 				Self.els.work = Spawn.find(`.right .work`);
 				Self.els.canvas = Spawn.find(`.right .canvas`);
@@ -26,14 +27,41 @@
 				// move hit/hurt discs
 				Self.els.canvas.on("mousedown", Self.moveDisc);
 
+				Self.dispatch({ type: "render-tree" });
+
 				// temp
-				Self.dispatch({ ...event, type: "draw-frame", strip: "stance" });
+				Self.dispatch({ type: "draw-frame", strip: "stance" });
 				break;
 			case "spawn.close":
 				break;
 			// custom events
+			case "render-tree":
+				str = [];
+				Assets.sprites.map(sprite => {
+					str.push(`<div class="item collapsed">
+								<i class="icon-arrow"></i>
+								<i class="icon-folder"></i>
+								<span>${sprite.id}</span>
+								<div class="children">`);
+					Object.keys(Assets[sprite.id]).map(key => {
+						str.push(`<div class="item">
+									<i class="icon-blank"></i>
+									<i class="icon-frame"></i>
+									<span>${key}</span>
+								</div>`);
+					});
+					str.push(`</div></div>`);
+				});
+				Self.els.tree.html(str.join(""));
+				break;
+			case "tree-select":
+				break;
 			case "frames-select":
 				el = $(event.target);
+				if (el.hasClass("active") || el[0] === event.el[0]) return;
+
+				event.el.find(".active").removeClass("active");
+				el.addClass("active");
 				Self.els.right.css({
 					"--aY": el.cssProp("--fY"),
 					"--aX": el.cssProp("--fX"),

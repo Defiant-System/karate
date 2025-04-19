@@ -21,12 +21,31 @@
 		}
 	}
 
-	.tree {
+	.left {
 		background: #f2f2f2;
+		position: relative;
 		width: 160px;
 		font-size: 0;
 
+		.tree {
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			overflow: auto;
+		}
+
 		.item {
+			&.collapsed {
+				height: 19px;
+
+				> .children {
+					height: 0;
+					overflow: hidden;
+				}
+			}
+
 			> i {
 				background: 50% 50% no-repeat;
 				background-size: 17px 17px;
@@ -116,7 +135,7 @@
 					background: url(~/gfx/sprite.png) no-repeat;
 					background-position: calc( calc( var( --aX ) * var( --size ) ) * -1 ) calc( calc( var( --aY ) * var( --size ) ) * -1 );
 					background-size: calc( var( --size ) * 10 ) auto;
-					box-shadow: 0 0 0 2px #f00;
+					box-shadow: 0 0 0 2px #f55;
 				}
 			}
 
@@ -196,6 +215,12 @@
 					box-shadow: 0 0 0 1px #0002,
 								0 1px 3px #0005;
 					cursor: pointer;
+
+					&.active {
+						box-shadow: 0 0 0 2px #f55,
+									0 1px 3px #0005;
+						cursor: default;
+					}
 				}
 			}
 		}
