@@ -120,7 +120,7 @@ class Fighter {
 
 	renderHitHurt(ctx) {
 		// hitboxes
-		ctx.fillStyle = "#5f5a";
+		ctx.fillStyle = "#0f06";
 		this.sheet.hurt.map(disc => {
 			ctx.beginPath();
 			ctx.arc(disc.x, disc.y, disc.r, 0, Math.TAU);
