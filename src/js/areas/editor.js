@@ -54,7 +54,16 @@
 				});
 				Self.els.tree.html(str.join(""));
 				break;
-			case "tree-select":
+			case "tree-click":
+				el = $(event.target);
+				switch (true) {
+					case el.hasClass("icon-arrow"):
+						el.toggleClass("down", el.hasClass("down"));
+						break;
+					case el.prop("nodeName") === "SPAN":
+						console.log(el);
+						break;
+				}
 				break;
 			case "frames-select":
 				el = $(event.target);
