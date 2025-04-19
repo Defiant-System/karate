@@ -32,6 +32,13 @@
 			case "spawn.close":
 				break;
 			// custom events
+			case "frames-select":
+				el = $(event.target);
+				Self.els.right.css({
+					"--aY": el.cssProp("--fY"),
+					"--aX": el.cssProp("--fX"),
+				});
+				break;
 			case "minimap-select":
 				Self.els.right.css({
 					"--aX": Math.floor(event.offsetX / 28.8),
@@ -58,12 +65,16 @@
 						x: event.clientX,
 						y: event.clientY,
 					},
-					data = {};
+					isResize = event.layerX > (offset.width - 10),
+					data = {
+						"--y": el.cssProp("--y"),
+						"--x": el.cssProp("--x"),
+						"--r": el.cssProp("--r"),
+					};
 				// simplify math during drag move
 				offset.radius = offset.width * .5;
 				// drag info
-				Self.drag = { doc, el, click, offset, data };
-console.log( el.is(":before", event) );
+				Self.drag = { doc, el, click, offset, isResize, data };
 				// cover app view
 				Self.els.layout.addClass("cover");
 				// bind event handlers
@@ -72,18 +83,24 @@ console.log( el.is(":before", event) );
 			case "mousemove":
 				let dY = event.clientY - Drag.click.y,
 					dX = event.clientX - Drag.click.x;
-
-				Drag.data.top = dY + Drag.offset.top;
-				Drag.data.left = dX + Drag.offset.left;
-
+				if (Drag.isResize) {
+					Drag.data.width = dX + Drag.offset.width;
+					Drag.data.height = dX + Drag.offset.width;
+					Drag.data.top = Drag.offset.top - (dX / 2);
+					Drag.data.left = Drag.offset.left - (dX / 2);
+				} else {
+					Drag.data.top = dY + Drag.offset.top;
+					Drag.data.left = dX + Drag.offset.left;
+				}
+				// UI update
 				Drag.el.css(Drag.data);
 				break;
 			case "mouseup":
 				// update disc details
-				let css = { top: "", left: "" };
+				let css = {};
+				css["--r"] = ((Drag.data.width || Drag.offset.radius) * .5).toFixed(1);
 				css["--y"] = ((Drag.data.top + Drag.offset.radius) / 2).toFixed(1);
 				css["--x"] = ((Drag.data.left + Drag.offset.radius) / 2).toFixed(1);
-				// css["--r"] = Drag.data["--r"];
 				Drag.el.css(css);
 
 				// uncover app view
