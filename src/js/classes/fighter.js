@@ -50,8 +50,6 @@ class Fighter {
 		this.sheet.name = name;
 		this.sheet.strip = [...Assets.fighter[name].strip];
 		this.sheet.strip.filter(f => !!f.d).map(f => f.d = (f.d / 120) * this.arena.speed);
-		this.sheet.hit = this.sheet.strip.hit || [];
-		this.sheet.hurt = this.sheet.strip.hurt || [];
 		this.sheet.w8l = false;
 		this.sheet.wait = true;
 		this.sheet.speed = this.arena.speed;
@@ -91,7 +89,7 @@ class Fighter {
 
 	render(ctx) {
 		let sheet = this.sheet,
-			{ x, y } = sheet.strip[sheet.index],
+			{ x, y, hit, hurt } = sheet.strip[sheet.index],
 			w = 72,
 			h = 72,
 			sw = this.size,
@@ -104,28 +102,28 @@ class Fighter {
 			if (this.arena._newGfx) ctx.drawImage(this.arena.assets.stance.img, 0, 0, 144, 144);
 			else ctx.drawImage(this.asset.cvs, x, y, w, h, 0, 0, sw, sh);
 			// render hit/hurt boxes
-			if (this.arena._showHitHurt && !this.arena._newGfx) this.renderHitHurt(ctx);
+			if (this.arena._showHitHurt && !this.arena._newGfx) this.renderHitHurt(ctx, hit, hurt);
 			ctx.setTransform(1,0,0,1,0,0);
 		} else {
 			ctx.translate(this.left, this.top);
 			if (this.arena._newGfx) ctx.drawImage(this.arena.assets.stance.img, 0, 0, 144, 144);
 			else ctx.drawImage(this.asset.cvs, x, y, w, h, 0, 0, sw, sh);
 			// render hit/hurt boxes
-			if (this.arena._showHitHurt && !this.arena._newGfx) this.renderHitHurt(ctx);
+			if (this.arena._showHitHurt && !this.arena._newGfx) this.renderHitHurt(ctx, hit, hurt);
 		}
 		ctx.restore();
 	}
 
-	renderHitHurt(ctx) {
+	renderHitHurt(ctx, hit=[], hurt=[]) {
 		// hitboxes
 		ctx.fillStyle = "#0f06";
-		this.sheet.hurt.map(disc => {
+		hurt.map(disc => {
 			ctx.beginPath();
 			ctx.arc(disc.x, disc.y, disc.r, 0, Math.TAU);
 			ctx.fill();
 		});
 		// ctx.fillStyle = "#f55a";
-		// this.sheet.hit.map(disc => {
+		// hit.map(disc => {
 		// 	ctx.beginPath();
 		// 	ctx.arc(disc.x, disc.y, disc.r, 0, Math.TAU);
 		// 	ctx.fill();

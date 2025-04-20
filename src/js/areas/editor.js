@@ -145,7 +145,9 @@
 			case "mousedown":
 				let el = $(event.target);
 				if (!el.parent().hasClass("canvas")) {
-					el = Self.els.canvas.append(`<span style="--x: 5; --y: 5; --r: 5;"></span>`);
+					let oX = event.offsetX >> 1,
+						oY = event.offsetY >> 1;
+					el = Self.els.canvas.append(`<span style="--x: ${oX}; --y: ${oY}; --r: 5;"></span>`);
 				}
 
 				let doc = $(document),
@@ -186,7 +188,7 @@
 				break;
 			case "mouseup":
 				// update disc details
-				let css = {};
+				let css = { top: "", left: "" };
 				css["--r"] = (((Drag.data.width / 2) || Drag.offset.radius) * .5).toFixed(1);
 				css["--y"] = ((Drag.data.top + Drag.offset.radius) / 2).toFixed(1);
 				css["--x"] = ((Drag.data.left + Drag.offset.radius) / 2).toFixed(1);
