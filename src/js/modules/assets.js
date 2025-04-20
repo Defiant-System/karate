@@ -2,9 +2,11 @@
 let Assets = {
 	sprites: [
 		{ id: "smack", width: 720, height: 720, src: "~/gfx/sprite.png" },
+		{ id: "stance", width: 144, height: 144, src: "~/icons/stance-01.png" },
 		{ id: "fighter", width: 720, height: 720, src: "~/gfx/sprite.png" },
 	],
 	smack: {},
+	stance: {},
 	fighter: {
 		headButt: {
 			hit: [],

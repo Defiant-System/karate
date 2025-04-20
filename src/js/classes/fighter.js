@@ -99,19 +99,15 @@ class Fighter {
 		if (this.flip < 0) {
 			ctx.translate(this.left+sw, this.top);
 			ctx.scale(-1, 1);
-			// ctx.fillStyle = "#fffa";
-			// ctx.rect(0, 0, sw, sh);
-			// ctx.fill();
 			ctx.drawImage(this.asset.cvs, x, y, w, h, 0, 0, sw, sh);
+			// ctx.drawImage(this.arena.assets.stance.img, 0, 0, 144, 144);
 			// render hit/hurt boxes
 			if (this.arena._showHitHurt) this.renderHitHurt(ctx);
 			ctx.setTransform(1,0,0,1,0,0);
 		} else {
 			ctx.translate(this.left, this.top);
-			// ctx.fillStyle = "#fffa";
-			// ctx.rect(0, 0, sw, sh);
-			// ctx.fill();
 			ctx.drawImage(this.asset.cvs, x, y, w, h, 0, 0, sw, sh);
+			// ctx.drawImage(this.arena.assets.stance.img, 0, 0, 144, 144);
 			// render hit/hurt boxes
 			if (this.arena._showHitHurt) this.renderHitHurt(ctx);
 		}
