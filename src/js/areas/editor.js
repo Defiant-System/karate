@@ -5,6 +5,11 @@
 	init() {
 		// fast references
 		this.els = {};
+		// settings
+		this._strip = "stance";
+		this._frameIndex = 0;
+		this._hit = false;
+		this._hurt = true;
 	},
 	dispatch(event) {
 		let APP = karate,
@@ -68,11 +73,16 @@
 				}
 				break;
 			case "render-strip":
+				// remeber active strip
+				Self._strip = event.id;
+				// prepare DOM render
 				str = [];
-				Assets.fighter[event.id].strip.map(f => {
+				Assets.fighter[Self._strip].strip.map(f => {
 					str.push(`<span ${f.flip ? `class="flip"` : ""} style="--fY: ${f.y / 72}; --fX: ${f.x / 72};"><i>${f.d | 120}ms</i><s>${f.dx | 0}px</s><b>${f.dy | 0}px</b></span>`);
 				});
 				Self.els.frames.html(str.join(""));
+				// auto select first frame
+				Self.els.frames.find("span:nth(0)").trigger("click");
 				break;
 			case "frames-select":
 				el = $(event.target);
@@ -86,6 +96,9 @@
 				});
 				// flip canvas
 				Self.els.canvas.toggleClass("flip", !el.hasClass("flip"));
+				// drag hit / hurt boxes
+				Self._frameIndex = el.index();
+				Self.dispatch({ type: "draw-boxes" });
 				break;
 			case "minimap-select":
 				Self.els.right.css({
@@ -93,9 +106,12 @@
 					"--aY": Math.floor(event.offsetY / 28.8),
 				});
 				break;
-			case "draw-frame":
-				str = Assets.fighter[event.strip].hurt
-							.map(f => `<span style="--x: ${f.x}; --y: ${f.y}; --r: ${f.r};"></span>`);
+			case "draw-boxes":
+				str = [];
+				if (Self._hurt) {
+					let arr = Assets.fighter[Self._strip].strip[Self._frameIndex].hurt || [];
+					arr.map(f => str.push(`<span style="--x: ${f.x}; --y: ${f.y}; --r: ${f.r};"></span>`));
+				}
 				Self.els.canvas.html(str.join(""));
 				break;
 		}

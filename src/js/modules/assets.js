@@ -8,231 +8,26 @@ let Assets = {
 	smack: {},
 	stance: {},
 	fighter: {
-		headButt: {
-			hit: [],
-			hurt: [],
-			strip: [
-				{ x: 0, y: 432 },
-				{ x: 144, y: 432, d: 200, wait: true },
-				{ x: 432, y: 432 },
-			]
-		},
-		backKick: {
-			hit: [],
-			hurt: [],
-			strip: [
-				{ x: 0, y: 0, d: 10 },
-				{ x: 360, y: 0, dx: -7 },
-				{ x: 432, y: 0, dx: -17 },
-				{ x: 504, y: 0, dx: -13 },
-				{ x: 576, y: 0, dx: -7 },
-				{ x: 648, y: 0, dx: -7, d: 300, wait: true },
-				{ x: 576, y: 0 },
-				{ x: 0, y: 0, dx: -31, flip: true },
-			]
-		},
-		flyKick: {
-			hit: [],
-			hurt: [],
-			strip: [
-				{ x: 648, y: 432 },
-				{ x: 72, y: 216, dx: 15, dy: -11 },
-				{ x: 144, y: 216, dx: 17, dy: -5 },
-				{ x: 144, y: 216, dx: 25, dy: -8 },
-				{ x: 0, y: 216, dx: 9, dy: 24 },
-			]
-		},
-		teaKick: {
-			hit: [],
-			hurt: [],
-			strip: [
-				{ x: 504, y: 72 },
-				{ x: 576, y: 72, dy: -2 },
-				{ x: 648, y: 144, dy: -12 },
-				{ x: 648, y: 72, dy: 12 },
-				{ x: 576, y: 72, dy: 2 },
-			]
-		},
-		highKick: {
-			hit: [],
-			hurt: [],
-			strip: [
-				{ x: 72, y: 72 },
-				{ x: 360, y: 72, dx: -5 },
-				{ x: 432, y: 72, dx: 8, d: 150, wait: true },
-				{ x: 72, y: 72, dx: -3 },
-			]
-		},
-		midKick: {
-			hit: [],
-			hurt: [],
-			strip: [
-				{ x: 72, y: 72 },
-				{ x: 216, y: 72, dx: -5 },
-				{ x: 288, y: 72, dx: 9, d: 150, wait: true },
-				{ x: 360, y: 72, dx: -9 },
-				{ x: 72, y: 72, dx: 5 },
-			]
-		},
-		lowKick: {
-			hit: [],
-			hurt: [],
-			strip: [
-				{ x: 72, y: 72 },
-				{ x: 144, y: 72, dx: 17, d: 150, wait: true },
-				{ x: 72, y: 72, dx: -17 },
-			]
-		},
-		backFlip: {
-			hit: [],
-			hurt: [],
-			strip: [
-				{ x: 72, y: 144, dx: -2 },
-				{ x: 144, y: 144, dx: -5 },
-				{ x: 216, y: 144, dx: -3 },
-				{ x: 288, y: 144, dx: -8 },
-				{ x: 360, y: 144, dx: -8 },
-				{ x: 432, y: 144, dx: -8 },
-				{ x: 504, y: 144, dx: -15 },
-				{ x: 576, y: 144, dx: -12 },
-				{ x: 648, y: 432, dx: -31 },
-			]
-		},
-		flip: {
-			hit: [],
-			hurt: [],
-			strip: [
-				{ x: 0, y: 0 },
-				{ x: 504, y: 432 },
-				{ x: 0, y: 0, flip: true },
-			]
-		},
-		sweep: {
-			hit: [],
-			hurt: [],
-			strip: [
-				{ x: 504, y: 216 },
-				{ x: 432, y: 216, d: 150, wait: true },
-				{ x: 504, y: 216 },
-			]
-		},
-		highPunch: {
-			hit: [],
-			hurt: [],
-			strip: [
-				{ x: 432, y: 432 },
-				{ x: 216, y: 432, wait: true },
-				{ x: 432, y: 432 },
-			]
-		},
-		midPunch: {
-			hit: [],
-			hurt: [],
-			strip: [
-				{ x: 288, y: 432 },
-				{ x: 360, y: 432, dx: 11, wait: true },
-				{ x: 288, y: 432, dx: -11 },
-			]
-		},
-		hiKo: {
-			hit: [],
-			hurt: [],
-			strip: [
-				{ x: 0, y: 0, d: 60 },
-				{ x: 0, y: 288, dx: -31, dy: -6 },
-				{ x: 72, y: 288, dx: -23, dy: 3 },
-				{ x: 144, y: 288, dx: -19, dy: 4 },
-				{ x: 216, y: 288, dx: -15 },
-				{ x: 216, y: 288, dx: -8, d: 1e3 },
-				{ x: 0, y: 360 },
-				{ x: 72, y: 360 },
-				{ x: 144, y: 360 },
-				{ x: 216, y: 360 },
-			]
-		},
-		midKo: {
-			hit: [],
-			hurt: [],
-			strip: [
-				{ x: 0, y: 0, d: 20 },
-				{ x: 288, y: 288, dx: -29 },
-				{ x: 360, y: 288, dx: -8 },
-				{ x: 432, y: 288, dx: -15 },
-				{ x: 504, y: 288, dx: -18, d: 1e3 },
-				{ x: 144, y: 360 },
-				{ x: 216, y: 360 },
-			]
-		},
-		lowKo: {
-			hit: [],
-			hurt: [],
-			strip: [
-				{ x: 576, y: 216 },
-				{ x: 648, y: 216 },
-				{ x: 576, y: 288 },
-				{ x: 648, y: 288, d: 1e3 },
-				{ x: 648, y: 288 },
-				{ x: 288, y: 360 },
-				{ x: 216, y: 360, d: 300 },
-			]
-		},
-		jump: {
-			hit: [],
-			hurt: [],
-			strip: [
-				{ x: 72, y: 216, dy: -4 },
-				{ x: 72, y: 216, dy: -7 },
-				{ x: 0, y: 216, dy: 5 },
-				{ x: 648, y: 432, dy: 6 },
-			]
-		},
-		highBlock: {
-			hit: [],
-			hurt: [],
-			strip: [
-				{ x: 648, y: 360, wait: true },
-			]
-		},
-		midBlock: {
-			hit: [],
-			hurt: [],
-			strip: [
-				{ x: 432, y: 432, wait: true },
-			]
-		},
-		bow: {
-			hit: [],
-			hurt: [],
-			strip: [
-				{ x: 504, y: 360, d: 200 },
-				{ x: 576, y: 360, d: 500 },
-				{ x: 504, y: 360, d: 300 },
-			]
-		},
-		walk: {
-			hit: [],
-			hurt: [],
-			strip: [
-				{ x: 0, y: 0 },
-				{ x: 72, y: 0 },
-				{ x: 144, y: 0 },
-				{ x: 216, y: 0 },
-				{ x: 0, y: 72 },
-				{ x: 72, y: 0 },
-			]
-		},
-		stance: {
-			hit: [],
-			hurt: [{ x: 66, y: 50, r: 15 }, { x: 47, y: 82, r: 11 }, { x: 77, y: 85, r: 12 }, { x: 45, y: 116, r: 12 }, { x: 94, y: 118, r: 11 }, { x: 34, y: 133, r: 10 }, { x: 108, y: 133, r: 10 }],
-			strip: [
-				{ x: 0, y: 0 },
-				// { x: 0, y: 0, d: 4e4 },
-				// // pants drops after 10s
-				// { x: 216, y: 216 },
-				// { x: 288, y: 216, d: 200 },
-				// { x: 360, y: 216, d: 4e3 },
-				// { x: 288, y: 216, d: 200 },
-			]
-		}
+		headButt: @import "anim/headButt.js",
+		backKick: @import "anim/backKick.js",
+		flyKick: @import "anim/flyKick.js",
+		teaKick: @import "anim/teaKick.js",
+		highKick: @import "anim/highKick.js",
+		midKick: @import "anim/midKick.js",
+		lowKick: @import "anim/lowKick.js",
+		backFlip: @import "anim/backFlip.js",
+		flip: @import "anim/flip.js",
+		sweep: @import "anim/sweep.js",
+		highPunch: @import "anim/highPunch.js",
+		midPunch: @import "anim/midPunch.js",
+		highKo: @import "anim/highKo.js",
+		midKo: @import "anim/midKo.js",
+		lowKo: @import "anim/lowKo.js",
+		jump: @import "anim/jump.js",
+		highBlock: @import "anim/highBlock.js",
+		midBlock: @import "anim/midBlock.js",
+		bow: @import "anim/bow.js",
+		walk: @import "anim/walk.js",
+		stance: @import "anim/stance.js",
 	}
 };
