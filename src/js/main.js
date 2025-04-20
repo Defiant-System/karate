@@ -52,6 +52,7 @@ const karate = {
 				Self.els.content.find(".game-view").css({
 					"--img": `url('~/gfx/${event.arg}')`
 				});
+				// toggles fighter image asset
 				Self.game.arena._newGfx = event.arg !== "bg-01.png";
 				break;
 			case "set-speed":

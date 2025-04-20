@@ -91,7 +91,9 @@ class Fighter {
 
 	render(ctx) {
 		let sheet = this.sheet,
-			{ x, y, w, h } = sheet.strip[sheet.index],
+			{ x, y } = sheet.strip[sheet.index],
+			w = 72,
+			h = 72,
 			sw = this.size,
 			sh = this.size;
 		// console.log(x, y, w, h );
@@ -102,14 +104,14 @@ class Fighter {
 			if (this.arena._newGfx) ctx.drawImage(this.arena.assets.stance.img, 0, 0, 144, 144);
 			else ctx.drawImage(this.asset.cvs, x, y, w, h, 0, 0, sw, sh);
 			// render hit/hurt boxes
-			if (this.arena._showHitHurt) this.renderHitHurt(ctx);
+			if (this.arena._showHitHurt && !this.arena._newGfx) this.renderHitHurt(ctx);
 			ctx.setTransform(1,0,0,1,0,0);
 		} else {
 			ctx.translate(this.left, this.top);
 			if (this.arena._newGfx) ctx.drawImage(this.arena.assets.stance.img, 0, 0, 144, 144);
 			else ctx.drawImage(this.asset.cvs, x, y, w, h, 0, 0, sw, sh);
 			// render hit/hurt boxes
-			if (this.arena._showHitHurt) this.renderHitHurt(ctx);
+			if (this.arena._showHitHurt && !this.arena._newGfx) this.renderHitHurt(ctx);
 		}
 		ctx.restore();
 	}

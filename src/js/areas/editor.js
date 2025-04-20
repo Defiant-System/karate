@@ -23,14 +23,12 @@
 				Self.els.work = Spawn.find(`.right .work`);
 				Self.els.canvas = Spawn.find(`.right .canvas`);
 				Self.els.minimap = Spawn.find(`.right .minimap`);
+				Self.els.frames = Spawn.find(`.right .frames`);
 
 				// move hit/hurt discs
 				Self.els.canvas.on("mousedown", Self.moveDisc);
 
 				Self.dispatch({ type: "render-tree" });
-
-				// temp
-				Self.dispatch({ type: "draw-frame", strip: "stance" });
 				break;
 			case "spawn.close":
 				break;
@@ -59,11 +57,22 @@
 				switch (true) {
 					case el.hasClass("icon-arrow"):
 						el.toggleClass("down", el.hasClass("down"));
+						el.parent().toggleClass("collapsed", el.hasClass("down"));
 						break;
 					case el.prop("nodeName") === "SPAN":
-						console.log(el);
+						Self.els.tree.find(".active").removeClass("active");
+						el.parent().addClass("active");
+						// render strip
+						Self.dispatch({ type: "render-strip", id: el.text() });
 						break;
 				}
+				break;
+			case "render-strip":
+				str = [];
+				Assets.fighter[event.id].strip.map(f => {
+					str.push(`<span ${f.flip ? `class="flip"` : ""} style="--fY: ${f.y / 72}; --fX: ${f.x / 72};"><i>${f.d | 120}ms</i><s>${f.dx | 0}px</s><b>${f.dy | 0}px</b></span>`);
+				});
+				Self.els.frames.html(str.join(""));
 				break;
 			case "frames-select":
 				el = $(event.target);
@@ -75,6 +84,8 @@
 					"--aY": el.cssProp("--fY"),
 					"--aX": el.cssProp("--fX"),
 				});
+				// flip canvas
+				Self.els.canvas.toggleClass("flip", !el.hasClass("flip"));
 				break;
 			case "minimap-select":
 				Self.els.right.css({

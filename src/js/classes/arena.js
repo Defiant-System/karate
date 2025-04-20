@@ -15,7 +15,7 @@ class Arena {
 
 		// config
 		this._speed = 120;
-		this._newGfx = true;
+		this._newGfx = false;
 		this._showHitHurt = true;
 
 		// create FPS controller
