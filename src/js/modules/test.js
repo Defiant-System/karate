@@ -13,7 +13,7 @@ let Test = {
 
 			// setTimeout(() => APP.editor.els.frames.find(`span:nth(5)`).trigger("click"), 200);
 
-			setTimeout(() => APP.editor.dispatch({ type: "output-data" }), 200);
+			// setTimeout(() => APP.editor.dispatch({ type: "output-data" }), 200);
 		}, 800);
 
 

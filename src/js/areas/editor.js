@@ -120,8 +120,15 @@
 				break;
 			case "output-data":
 				str = [];
-				str.push({ x: 22, y: 30, r: 13 });
-				console.log(`${Self._hit ? "hit" : "hurt"}:`, JSON.stringify(str));
+				Self.els.canvas.find(`span`).map(elem => {
+					let el = $(elem);
+					str.push({
+						x: el.cssProp("--x"),
+						y: el.cssProp("--y"),
+						r: el.cssProp("--r"),
+					});
+				});
+				console.log(`${Self._hit ? "hit" : "hurt"}:`, JSON.stringify(str).replace(/"/g, "").replace(/,/g, ", "));
 				break;
 			case "toggle-boxes":
 				Self._hit = event.arg === "hit";
@@ -136,8 +143,12 @@
 			Drag = Self.drag;
 		switch (event.type) {
 			case "mousedown":
+				let el = $(event.target);
+				if (!el.parent().hasClass("canvas")) {
+					el = Self.els.canvas.append(`<span style="--x: 5; --y: 5; --r: 5;"></span>`);
+				}
+
 				let doc = $(document),
-					el = $(event.target),
 					offset = el.offset(),
 					click = {
 						x: event.clientX,
