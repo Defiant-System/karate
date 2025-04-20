@@ -187,7 +187,7 @@
 			case "mouseup":
 				// update disc details
 				let css = {};
-				css["--r"] = ((Drag.data.width || Drag.offset.radius) * .5).toFixed(1);
+				css["--r"] = (((Drag.data.width / 2) || Drag.offset.radius) * .5).toFixed(1);
 				css["--y"] = ((Drag.data.top + Drag.offset.radius) / 2).toFixed(1);
 				css["--x"] = ((Drag.data.left + Drag.offset.radius) / 2).toFixed(1);
 				Drag.el.css(css);

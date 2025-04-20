@@ -48,10 +48,10 @@ class Fighter {
 	move(name) {
 		if (this.sheet.name === name) return;
 		this.sheet.name = name;
-		this.sheet.hit = [...Assets.fighter[name].hit];
-		this.sheet.hurt = [...Assets.fighter[name].hurt];
 		this.sheet.strip = [...Assets.fighter[name].strip];
 		this.sheet.strip.filter(f => !!f.d).map(f => f.d = (f.d / 120) * this.arena.speed);
+		this.sheet.hit = this.sheet.strip.hit || [];
+		this.sheet.hurt = this.sheet.strip.hurt || [];
 		this.sheet.w8l = false;
 		this.sheet.wait = true;
 		this.sheet.speed = this.arena.speed;
