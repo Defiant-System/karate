@@ -8,8 +8,8 @@
 		// settings
 		this._strip = "stance";
 		this._frameIndex = 0;
-		this._hit = false;
-		this._hurt = true;
+		this._hit = true;
+		this._hurt = false;
 	},
 	dispatch(event) {
 		let APP = karate,

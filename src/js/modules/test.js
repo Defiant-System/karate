@@ -7,7 +7,7 @@ let Test = {
 		setTimeout(() => window.open("editor"), 300);
 		setTimeout(() => {
 			APP.editor.els.tree.find(`> .item:nth(2) > .icon-arrow`).trigger("click");
-			APP.editor.els.tree.find(`> .item:nth(2) > .children > .item:nth(9) > span`).trigger("click");
+			APP.editor.els.tree.find(`> .item:nth(2) > .children > .item:nth(0) > span`).trigger("click");
 			// console.log( APP.editor.els.tree.find(`> .item:nth(2) > .children > .item:nth(0) > span`) );
 			// APP.editor.dispatch({ type: "draw-frame", strip: "stance" });
 
