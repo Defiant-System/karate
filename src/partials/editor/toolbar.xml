@@ -5,9 +5,11 @@
 			<!-- <Select name="Background" menu="editor-layer"></Select>
 			<Divider />
 			-->
-			<Options type="grouped">
-				<Tool name="Hit" click="toggle-boxes" arg="hit" state="active"/>
-				<Tool name="Hurt" click="toggle-boxes" arg="hurt"/>
+			<Tool name="Output" click="output-data"/>
+			<Divider />
+			<Options>
+				<Tool name="Hit" click="toggle-boxes" arg="hit"/>
+				<Tool name="Hurt" click="toggle-boxes" arg="hurt" state="active"/>
 			</Options>
 		</Group>
 	</ToolSet>

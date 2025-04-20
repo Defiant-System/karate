@@ -108,12 +108,26 @@
 				break;
 			case "draw-boxes":
 				str = [];
+				if (Self._hit) {
+					let arr = Assets.fighter[Self._strip].strip[Self._frameIndex].hit || [];
+					arr.map(f => str.push(`<span style="--x: ${f.x}; --y: ${f.y}; --r: ${f.r};"></span>`));
+				}
 				if (Self._hurt) {
 					let arr = Assets.fighter[Self._strip].strip[Self._frameIndex].hurt || [];
 					arr.map(f => str.push(`<span style="--x: ${f.x}; --y: ${f.y}; --r: ${f.r};"></span>`));
 				}
 				Self.els.canvas.html(str.join(""));
 				break;
+			case "output-data":
+				str = [];
+				str.push({ x: 22, y: 30, r: 13 });
+				console.log(`${Self._hit ? "hit" : "hurt"}:`, JSON.stringify(str));
+				break;
+			case "toggle-boxes":
+				Self._hit = event.arg === "hit";
+				Self._hurt = event.arg === "hurt";
+				Self.dispatch({ type: "draw-boxes" });
+				return true;
 		}
 	},
 	moveDisc(event) {
