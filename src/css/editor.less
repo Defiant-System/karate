@@ -112,7 +112,7 @@
 				background-size: calc( var( --size ) * 2 ) calc( var( --size ) * 2 );
 				position: absolute;
 				top: 22px;
-				left: 331px;
+				left: 336px;
 				width: calc( var( --size ) * 10 );
 				height: calc( var( --size ) * 10 );
 				box-shadow: 0 0 0 1px #0002,
@@ -156,7 +156,7 @@
 
 			.canvas {
 				background-size: 8px 8px;
-				left: 20px;
+				left: 25px;
 
 				&.flip {
 					&:before {
@@ -169,6 +169,7 @@
 					background-position: calc( calc( var( --aX ) * var( --size ) ) * -10 ) calc( calc( var( --aY ) * var( --size ) ) * -10 );
 				}
 
+				div,
 				span {
 					position: absolute;
 					top: calc( calc( var(--y) * 2px ) - calc( var(--r) * 2px ) );
@@ -212,18 +213,37 @@
 						z-index: 2;
 					}
 				}
+
+				div {
+					&:before {
+						background: #22b9;
+						cursor: default;
+					}
+
+					&:after {
+						display: none;
+					}
+				}
 			}
 		}
 
 		.strip {
+			position: relative;
 			height: 93px;
 			background: #ddd;
 			border-top: 1px solid #777a;
 			--size: 36px;
 
 			.frames {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
 				font-size: 0;
 				padding: 10px 0 0 10px;
+				white-space: nowrap;
+				overflow-x: auto;
 
 				span {
 					background: #eaeaea;

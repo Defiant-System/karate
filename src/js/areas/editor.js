@@ -8,8 +8,8 @@
 		// settings
 		this._strip = "stance";
 		this._frameIndex = 0;
-		this._hit = true;
-		this._hurt = false;
+		this._hit = false;
+		this._hurt = true;
 	},
 	dispatch(event) {
 		let APP = karate,
@@ -113,6 +113,14 @@
 					arr.map(f => str.push(`<span style="--x: ${f.x}; --y: ${f.y}; --r: ${f.r};"></span>`));
 				}
 				if (Self._hurt) {
+					let all = [];
+					Object.keys(Assets.fighter).map(id => {
+						Assets.fighter[id].strip.map(frame => {
+							if (frame.hit) all.push(...frame.hit);
+						});
+					});
+					all.map(h => str.push(`<div style="--x: ${h.x}; --y: ${h.y}; --r: ${h.r};"></div>`));
+
 					let arr = Assets.fighter[Self._strip].strip[Self._frameIndex].hurt || [];
 					arr.map(f => str.push(`<span style="--x: ${f.x}; --y: ${f.y}; --r: ${f.r};"></span>`));
 				}
