@@ -14,9 +14,9 @@ class Arena {
 		this.entities = [];
 
 		// config
-		this._speed = 120;
+		this._speed = 520;
 		this._newGfx = false;
-		this._showHitHurt = false;
+		this._showHitHurt = true;
 
 		// create FPS controller
 		let Self = this;
@@ -62,9 +62,11 @@ class Arena {
 		this.player = new Player({ arena: this, colors: [[255,255,255],[145,145,145],[218,0,0]], left: 290, flip: 1 });
 		// adding opponent
 		this.entities.push(new AI({ arena: this, colors: [[218,0,0],[109,0,0],[238,102,238]], left: 400 }));
-		this.entities.push(new AI({ arena: this, colors: [[0,0,255],[0,0,109],[218,218,0]], left: 550 }));
+		// this.entities.push(new AI({ arena: this, colors: [[0,0,255],[0,0,109],[218,218,0]], left: 550 }));
 		// adding player
 		this.entities.push(this.player);
+		// set fighter opponent
+		this.entities.map(fighter => fighter.opponents = this.entities.filter(f => f !== fighter));
 	}
 
 	update(delta, time) {

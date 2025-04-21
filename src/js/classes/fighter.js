@@ -33,11 +33,12 @@ class Fighter {
 		}
 		ctx.putImageData(pixels, 0, 0);
 
-
 		this.size = 144;
 		this.top = 310;
 		this.left = left || 100;
 		this.flip = flip || -1;
+		this.opponents = [];
+		this._contact = [];
 
 		// animation frames
 		this.sheet = {};
@@ -50,6 +51,7 @@ class Fighter {
 		this.sheet.name = name;
 		this.sheet.strip = [...Assets.fighter[name].strip];
 		this.sheet.strip.filter(f => !!f.d).map(f => f.d = (f.d / 120) * this.arena.speed);
+		this.sheet.frame = this.sheet.strip[0];
 		this.sheet.w8l = false;
 		this.sheet.wait = true;
 		this.sheet.speed = this.arena.speed;
@@ -77,6 +79,7 @@ class Fighter {
 			}
 
 			let frame = strip[this.sheet.index];
+			this.sheet.frame = frame;
 			if (frame.dx !== undefined && (!this.sheet.wait || !this.sheet.w8l)) {
 				this.sheet.w8l = true;
 				this.left += (frame.dx * this.flip);
@@ -84,6 +87,34 @@ class Fighter {
 			if (frame.dy !== undefined) this.top += frame.dy;
 			if (frame.d) this.sheet.duration = frame.d;
 			if (frame.flip) this.flip *= -1;
+
+			if (frame.hit) {
+				let hits = frame.hit.map(h => ({
+						y: h.y + this.top,
+						x: h.x + this.left,
+						r: h.r,
+					})),
+					contact = [],
+					hurts = [];
+				// get all hurt circles
+				this.opponents.map(fighter =>
+					fighter.sheet.frame.hurt.map(h =>
+						hurts.push({
+							y: h.y + fighter.top,
+							x: h.x + fighter.left,
+							r: h.r,
+						})));
+				// check if hit circles intersect
+				hits.map(hit => {
+					// console.log(hit.y, hit.x, hit.r);
+					hurts.map(hurt => {
+						// console.log(hurt.y, hurt.x, hurt.r);
+						if (Math.hypot(hit.x - hurt.x, hit.y - hurt.y) <= hit.r + hurt.r) {
+							this._contact.push(hit);
+						}
+					});
+				});
+			}
 		}
 	}
 
@@ -111,6 +142,16 @@ class Fighter {
 			// render hit/hurt boxes
 			if (this.arena._showHitHurt && !this.arena._newGfx) this.renderHitHurt(ctx, hit, hurt);
 		}
+		ctx.restore();
+
+		// contact
+		ctx.save();
+		ctx.fillStyle = "#f007";
+		this._contact.map(contact => {
+			ctx.beginPath();
+			ctx.arc(contact.x, contact.y, contact.r, 0, Math.TAU);
+			ctx.fill();
+		});
 		ctx.restore();
 	}
 
