@@ -82,35 +82,40 @@ class Fighter {
 			this.sheet.frame = frame;
 			if (frame.dx !== undefined && (!this.sheet.wait || !this.sheet.w8l)) {
 				this.sheet.w8l = true;
-				this.left += (frame.dx * this.flip);
+				this.left -= (frame.dx * this.flip);
 			}
 			if (frame.dy !== undefined) this.top += frame.dy;
 			if (frame.d) this.sheet.duration = frame.d;
-			if (frame.flip) this.flip *= -1;
+			if (frame.flip > 1) this.flip *= -1;
 
 			if (frame.hit) {
-				let hits = frame.hit.map(h => ({
-						y: h.y + this.top,
-						x: h.x + this.left,
-						r: h.r,
-					})),
+				console.log("player flip", this.flip);
+				let hits = frame.hit.map(h => {
+						// console.log(h.x , this.left);
+						return {
+							r: h.r,
+							y: this.top + h.y,
+							x: this.left - (this.flip > 0 ? this.size - h.x : this.size - h.x),
+						};
+					}),
 					contact = [],
 					hurts = [];
 				// get all hurt circles
 				this.opponents.map(fighter =>
-					fighter.sheet.frame.hurt.map(h =>
+					fighter.sheet.frame.hurt.map(h => {
 						hurts.push({
-							y: h.y + fighter.top,
-							x: h.x + fighter.left,
 							r: h.r,
-						})));
+							y: fighter.top + h.y,
+							x: fighter.left - (fighter.flip > 0 ? fighter.size - h.x : h.x),
+						})
+					}));
 				// check if hit circles intersect
 				hits.map(hit => {
-					// console.log(hit.y, hit.x, hit.r);
+					console.log(hit.x);
 					hurts.map(hurt => {
-						// console.log(hurt.y, hurt.x, hurt.r);
-						if (Math.hypot(hit.x - hurt.x, hit.y - hurt.y) <= hit.r + hurt.r) {
-							this._contact.push(hit);
+						console.log(hurt.x);
+						if (Math.hypot(hit.x - hurt.x, hit.y - hurt.y) < hit.r + hurt.r) {
+							this._contact.push(hit, hurt);
 						}
 					});
 				});
@@ -127,7 +132,7 @@ class Fighter {
 			sh = this.size;
 		// console.log(x, y, w, h );
 		ctx.save();
-		if (this.flip < 0) {
+		if (this.flip > 0) {
 			ctx.translate(this.left+sw, this.top);
 			ctx.scale(-1, 1);
 			if (this.arena._newGfx) ctx.drawImage(this.arena.assets.stance.img, 0, 0, 144, 144);
@@ -163,11 +168,11 @@ class Fighter {
 			ctx.arc(disc.x, disc.y, disc.r, 0, Math.TAU);
 			ctx.fill();
 		});
-		// ctx.fillStyle = "#f55a";
-		// hit.map(disc => {
-		// 	ctx.beginPath();
-		// 	ctx.arc(disc.x, disc.y, disc.r, 0, Math.TAU);
-		// 	ctx.fill();
-		// });
+		ctx.fillStyle = "#22fa";
+		hit.map(disc => {
+			ctx.beginPath();
+			ctx.arc(disc.x, disc.y, disc.r, 0, Math.TAU);
+			ctx.fill();
+		});
 	}
 }
