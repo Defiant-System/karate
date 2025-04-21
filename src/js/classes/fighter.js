@@ -90,12 +90,13 @@ class Fighter {
 
 			if (frame.hit) {
 				console.log("player flip", this.flip);
+				let hS = this.size * .5;
 				let hits = frame.hit.map(h => {
 						// console.log(h.x , this.left);
 						return {
 							r: h.r,
 							y: this.top + h.y,
-							x: this.left - (this.flip > 0 ? this.size - h.x : this.size - h.x),
+							x: this.left + (this.flip > 0 ? (h.x > hS ? hS - (h.x % hS) : this.size - h.x) : h.x),
 						};
 					}),
 					contact = [],
@@ -106,7 +107,7 @@ class Fighter {
 						hurts.push({
 							r: h.r,
 							y: fighter.top + h.y,
-							x: fighter.left - (fighter.flip > 0 ? fighter.size - h.x : h.x),
+							x: fighter.left + (fighter.flip > 0 ? (h.x > hS ? hS - (h.x % hS) : this.size - h.x) : h.x),
 						})
 					}));
 				// check if hit circles intersect
