@@ -104,22 +104,29 @@ class Fighter {
 				// get all hurt circles
 				this.opponents.map(fighter =>
 					fighter.sheet.frame.hurt.map(h => {
+						let tgt = "";
+						switch (true) {
+							case (h.y < 57): tgt = "head"; break;
+							case (h.y < 93): tgt = "mid"; break;
+							case (h.y < 119): tgt = "low"; break;
+							case (h.y < 134): tgt = "feet"; break;
+						}
 						hurts.push({
 							r: h.r,
 							y: fighter.top + h.y,
 							x: fighter.left + (fighter.flip > 0 ? (h.x > hS ? hS - (h.x % hS) : this.size - h.x) : h.x),
+							tgt,
 						})
 					}));
 				// check if hit circles intersect
 				hits.map(hit => {
-					console.log(hit.x);
 					hurts.map(hurt => {
-						console.log(hurt.x);
 						if (Math.hypot(hit.x - hurt.x, hit.y - hurt.y) < hit.r + hurt.r) {
-							this._contact.push(hit, hurt);
+							this._contact.push(hurt);
 						}
 					});
 				});
+				console.log(this._contact);
 			}
 		}
 	}
