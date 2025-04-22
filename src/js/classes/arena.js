@@ -14,7 +14,7 @@ class Arena {
 		this.entities = [];
 
 		// config
-		this._speed = 720;
+		this._speed = 520;
 		this._newGfx = false;
 		this._showHitHurt = false;
 
@@ -55,6 +55,10 @@ class Arena {
 
 	set speed(v) {
 		this._speed = v;
+	}
+
+	smack(opt) {
+		this.entities.push(new Smack({ ...opt, arena: this }));
 	}
 
 	ready() {

@@ -5,6 +5,9 @@ let Test = {
 		// auto stop Arena FPS control
 		setTimeout(() => APP.game.arena.fpsControl.stop(), 2900);
 
+		setTimeout(() => APP.game.arena.smack({ x: 100, y: 100 }), 1e3);
+		return;
+
 		// setTimeout(() => window.open("editor"), 300);
 		// setTimeout(() => {
 		// 	APP.editor.els.tree.find(`> .item:nth(2) > .icon-arrow`).trigger("click");
