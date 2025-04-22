@@ -1,5 +1,5 @@
 
-// karate.editor
+// karateka.editor
 
 {
 	init() {
@@ -12,7 +12,7 @@
 		this._hurt = true;
 	},
 	dispatch(event) {
-		let APP = karate,
+		let APP = karateka,
 			Self = APP.editor,
 			Spawn = event.spawn || Self.spawn,
 			str,
@@ -146,7 +146,7 @@
 		}
 	},
 	moveDisc(event) {
-		let APP = karate,
+		let APP = karateka,
 			Self = APP.editor,
 			Drag = Self.drag;
 		switch (event.type) {

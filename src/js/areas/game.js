@@ -1,5 +1,5 @@
 
-// karate.game
+// karateka.game
 
 {
 	init() {
@@ -15,7 +15,7 @@
 		this.arena = new Arena(this.els.canvas);
 	},
 	dispatch(event) {
-		let APP = karate,
+		let APP = karateka,
 			Self = APP.game,
 			Player = Self.arena.player,
 			value,

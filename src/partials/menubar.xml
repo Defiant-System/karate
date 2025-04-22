@@ -1,8 +1,8 @@
 <MenuBar>
-	<Menu name="Karate Plus">
-		<Menu name="About Karate Plus" shell="win -a"/>
+	<Menu name="Karate-ka">
+		<Menu name="About Karate-ka" shell="win -a"/>
 		<Menu type="divider"/>
-		<Menu name="Quit Karate Plus" shell="win -c"/>
+		<Menu name="Quit Karate-ka" shell="win -c"/>
 	</Menu>
 	<Menu name="Game" for="game-content">
 		<Menu name="Backgrounds&#8230;">

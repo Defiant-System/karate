@@ -9,7 +9,7 @@
 @import "./modules/test.js"
 
 
-const karate = {
+const karateka = {
 	init() {
 		// fast references
 		this.els = {
@@ -26,7 +26,7 @@ const karate = {
 		// DEV-ONLY-END
 	},
 	dispatch(event) {
-		let Self = karate,
+		let Self = karateka,
 			name,
 			el;
 		// proxy editor (spawn) events
@@ -76,4 +76,4 @@ const karate = {
 	editor: @import "./areas/editor.js",
 };
 
-window.exports = karate;
+window.exports = karateka;
