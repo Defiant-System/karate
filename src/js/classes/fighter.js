@@ -73,6 +73,7 @@ class Fighter {
 
 			if (this.sheet.index > len-1) {
 				if (!["stance", "walk"].includes(this.sheet.name)) {
+					delete this._KO;
 					this.move("stance");
 				}
 				this.sheet.index = 0;
@@ -89,7 +90,7 @@ class Fighter {
 			if (frame.flip > 1) this.flip *= -1;
 
 			if (frame.hit) {
-				console.log("player flip", this.flip);
+				// console.log("player flip", this.flip);
 				let hS = this.size * .5;
 				let hits = frame.hit.map(h => {
 						// console.log(h.x , this.left);
@@ -102,19 +103,20 @@ class Fighter {
 					contact = [],
 					hurts = [];
 				// get all hurt circles
-				this.opponents.map(fighter =>
+				this.opponents.filter(f => !f._KO).map(fighter =>
 					fighter.sheet.frame.hurt.map(h => {
 						let tgt = "";
 						switch (true) {
-							case (h.y < 57): tgt = "head"; break;
-							case (h.y < 93): tgt = "mid"; break;
-							case (h.y < 119): tgt = "low"; break;
-							case (h.y < 134): tgt = "feet"; break;
+							case (h.y < 57): tgt = "high"; break; // head
+							case (h.y < 93): tgt = "mid"; break; // mid
+							case (h.y < 119): tgt = "low"; break; // low
+							case (h.y < 134): tgt = "low"; break; // feet
 						}
 						hurts.push({
 							r: h.r,
 							y: fighter.top + h.y,
 							x: fighter.left + (fighter.flip > 0 ? (h.x > hS ? hS - (h.x % hS) : this.size - h.x) : h.x),
+							fighter,
 							tgt,
 						})
 					}));
@@ -122,13 +124,34 @@ class Fighter {
 				hits.map(hit => {
 					hurts.map(hurt => {
 						if (Math.hypot(hit.x - hurt.x, hit.y - hurt.y) < hit.r + hurt.r) {
-							this._contact.push(hurt);
+							let max = hit.r < hurt.r ? hit.r : hurt.r,
+								maxArea = (max ** 2) * Math.PI,
+								overlap = this.areaOfIntersection(hit.x, hit.y, hit.r, hurt.x, hurt.y, hurt.r),
+								perc = overlap / maxArea;
+							console.log( hit.r, hurt.r, (perc*100)|0 );
+							if (perc > .3) {
+								// this._contact.push(hurt);
+								// KO anim
+								hurt.fighter._KO = true;
+								hurt.fighter.move(`${hurt.tgt}Ko`);
+							}
 						}
 					});
 				});
-				console.log(this._contact);
+				// console.log(this._contact);
 			}
 		}
+	}
+
+	areaOfIntersection(x0, y0, r0, x1, y1, r1) {
+		let rr0 = r0 * r0,
+			rr1 = r1 * r1,
+			c = Math.sqrt((x1 - x0) * (x1 - x0) + (y1 - y0) * (y1 - y0)),
+			phi = (Math.acos((rr0 + (c * c) - rr1) / (2 * r0 * c))) * 2,
+			theta = (Math.acos((rr1 + (c * c) - rr0) / (2 * r1 * c))) * 2,
+			area1 = 0.5 * theta * rr1 - 0.5 * rr1 * Math.sin(theta),
+			area2 = 0.5 * phi * rr0 - 0.5 * rr0 * Math.sin(phi);
+		return area1 + area2;
 	}
 
 	render(ctx) {
