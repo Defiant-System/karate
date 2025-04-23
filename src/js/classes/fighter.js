@@ -12,26 +12,36 @@ class Fighter {
 			{ cvs, ctx } = Utils.createCanvas(width, height);
 		this.asset.cvs = cvs[0];
 		this.asset.ctx = ctx;
+		// fighter sprite shadow
+		this.asset.shadow = Utils.createCanvas(width, height);
+		this.asset.shadow.cvs = this.asset.shadow.cvs[0];
 
 		// repaints sprite for fighter
 		ctx.drawImage(this.asset.img, 0, 0);
-		let pixels = ctx.getImageData(0, 0, width, height);
-		let data = pixels.data;
+		this.asset.shadow.ctx.drawImage(this.asset.cvs, 0, 0);
+		let pixels = ctx.getImageData(0, 0, width, height),
+			data = pixels.data,
+			sP = this.asset.shadow.ctx.getImageData(0, 0, width, height),
+			sD = sP.data;
 		for (let i=0; i<data.length; i+=4) {
-			let r = data[i + 0],
-				g = data[i + 1],
-				b = data[i + 2],
+			let r = data[i+0],
+				g = data[i+1],
+				b = data[i+2],
 				len = 3;
 			while (len--) {
 				if (palette[len][0] === r && palette[len][1] === g && palette[len][2] === b) {
 					[r,g,b] = colors[len];
 				}
 			}
-			data[i + 0] = r;
-			data[i + 1] = g;
-			data[i + 2] = b;
+			data[i+0] = r;
+			data[i+1] = g;
+			data[i+2] = b;
+			if (sD[i+3] > 0) {
+				sD[i+0] = sD[i+1] = sD[i+2] = 0; // 255-sD[i+3];
+			}
 		}
 		ctx.putImageData(pixels, 0, 0);
+		this.asset.shadow.ctx.putImageData(sP, 0, 0);
 
 		this.size = 144;
 		this.top = 310;
@@ -173,14 +183,44 @@ class Fighter {
 			ctx.translate(this.left+sw, this.top);
 			ctx.scale(-1, 1);
 			if (this.arena._newGfx) ctx.drawImage(this.arena.assets.modern.img, 0, 0, 144, 144);
-			else ctx.drawImage(this.asset.cvs, x, y, w, h, 0, 0, sw, sh);
+			else {
+				// render shadow
+				ctx.save();
+				// shadow region
+				let region = new Path2D();
+				region.rect(0, 140, 144, 16);
+				ctx.clip(region);
+				// flip sprite frame
+				ctx.translate(0, 281);
+				ctx.scale(1, -1);
+				ctx.globalAlpha = .75;
+				ctx.drawImage(this.asset.shadow.cvs, x, y, w, h, 0, 0, sw, sh);
+				ctx.restore();
+				// draw fighter
+				ctx.drawImage(this.asset.cvs, x, y, w, h, 0, 0, sw, sh);
+			}
 			// render hit/hurt boxes
 			if (this.arena._showHitHurt && !this.arena._newGfx) this.renderHitHurt(ctx, hit, hurt);
 			ctx.setTransform(1,0,0,1,0,0);
 		} else {
 			ctx.translate(this.left, this.top);
 			if (this.arena._newGfx) ctx.drawImage(this.arena.assets.modern.img, 0, 0, 144, 144);
-			else ctx.drawImage(this.asset.cvs, x, y, w, h, 0, 0, sw, sh);
+			else {
+				// render shadow
+				ctx.save();
+				// shadow region
+				let region = new Path2D();
+				region.rect(0, 140, 144, 16);
+				ctx.clip(region);
+				// flip sprite frame
+				ctx.translate(0, 281);
+				ctx.scale(1, -1);
+				ctx.globalAlpha = .75;
+				ctx.drawImage(this.asset.shadow.cvs, x, y, w, h, 0, 0, sw, sh);
+				ctx.restore();
+				// draw fighter
+				ctx.drawImage(this.asset.cvs, x, y, w, h, 0, 0, sw, sh);
+			}
 			// render hit/hurt boxes
 			if (this.arena._showHitHurt && !this.arena._newGfx) this.renderHitHurt(ctx, hit, hurt);
 		}
