@@ -60,6 +60,7 @@
 					case "d": Player.move("lowKo", event.char); break;
 					case "f": Player.move("midKo", event.char); break;
 					case "g": Player.move("jump", event.char); break;
+					case "h": Player.move("flip", event.char); break;
 
 					case "p":
 						if (this.arena.fpsControl._stopped) this.arena.fpsControl.start();

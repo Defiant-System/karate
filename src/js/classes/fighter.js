@@ -42,13 +42,13 @@ class Fighter {
 		data = pixels.data
 		for (let i=0; i<data.length; i+=4) {
 			if (data[i+3] > 0) {
-				// data[i+0] = data[i+1] = data[i+2] = 0; // 255-data[i+3];
+				data[i+0] = data[i+1] = data[i+2] = 0; // 255-data[i+3];
 			}
 		}
 		this.asset.shadow.ctx.putImageData(pixels, 0, 0);
 
 		this.size = 144;
-		this.top = 220;
+		this.top = 302;
 		this.left = left || 100;
 		this.flip = flip || -1;
 		this.opponents = [];
@@ -101,7 +101,7 @@ class Fighter {
 			}
 			if (frame.dy !== undefined) this.top += frame.dy;
 			if (frame.d) this.sheet.duration = frame.d;
-			if (frame.flip > 1) this.flip *= -1;
+			if (frame.flip) this.flip *= -1;
 
 			if (frame.hit) {
 				// console.log("player flip", this.flip);
@@ -196,11 +196,14 @@ class Fighter {
 				ctx.save();
 				// shadow region
 				let region = new Path2D();
-				region.rect(0, 140, 144, 160);
+				region.rect(-40, 140, 184, 24);
 				ctx.clip(region);
+				
 				// flip sprite frame
-				ctx.translate(0, 280);
+				ctx.translate(-(angle/30) * 72, 280);
+				ctx.transform(1,0,-toRadians(angle),1,0,0);
 				ctx.scale(1, -1);
+				
 				ctx.globalAlpha = .5;
 				ctx.drawImage(this.asset.shadow.cvs, x, y, w, h, 0, 0, sw, sh);
 				ctx.restore();
@@ -218,7 +221,7 @@ class Fighter {
 				ctx.save();
 				// shadow region
 				let region = new Path2D();
-				region.rect(0, 140, 144, 160);
+				region.rect(-40, 140, 184, 24);
 				ctx.clip(region);
 
 				// flip sprite frame
@@ -226,7 +229,7 @@ class Fighter {
 				ctx.transform(1,0,toRadians(angle),1,0,0);
 				ctx.scale(1, -1);
 
-				ctx.globalAlpha = .75;
+				ctx.globalAlpha = .5;
 				ctx.drawImage(this.asset.shadow.cvs, x, y, w, h, 0, 0, sw, sh);
 				ctx.restore();
 				// draw fighter
