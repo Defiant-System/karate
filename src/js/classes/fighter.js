@@ -191,7 +191,7 @@ class Fighter {
 				region.rect(0, 140, 144, 16);
 				ctx.clip(region);
 				// flip sprite frame
-				ctx.translate(0, 281);
+				ctx.translate(0, 280);
 				ctx.scale(1, -1);
 				ctx.globalAlpha = .75;
 				ctx.drawImage(this.asset.shadow.cvs, x, y, w, h, 0, 0, sw, sh);
@@ -213,7 +213,7 @@ class Fighter {
 				region.rect(0, 140, 144, 16);
 				ctx.clip(region);
 				// flip sprite frame
-				ctx.translate(0, 281);
+				ctx.translate(0, 280);
 				ctx.scale(1, -1);
 				ctx.globalAlpha = .75;
 				ctx.drawImage(this.asset.shadow.cvs, x, y, w, h, 0, 0, sw, sh);

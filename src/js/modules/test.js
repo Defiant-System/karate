@@ -1,7 +1,7 @@
 
 let Test = {
 	init(APP) {
-		return;
+		// return;
 
 		// APP.game.arena._speed = 520;
 
