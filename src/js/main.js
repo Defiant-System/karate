@@ -58,7 +58,10 @@ const karateka = {
 				break;
 			case "set-speed":
 				Self.game.arena.speed = +event.arg;
-				console.log(Self.game.arena.speed);
+				// console.log(Self.game.arena.speed);
+				break;
+			case "toggle-show-hits":
+				Self.game.arena._showHitHurt = !Self.game.arena._showHitHurt;
 				break;
 			// proxy event
 			default:

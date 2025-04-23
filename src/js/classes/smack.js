@@ -8,7 +8,8 @@ class Smack {
 		this.left = x;
 
 		this.sheet = {
-			strip: arena.assets.smack,
+			img: arena.assets.smack.img,
+			strip: arena.assets.smack.strip,
 			speed: arena.speed,
 			duration: arena.speed,
 			index: 0,
@@ -20,16 +21,23 @@ class Smack {
 		if (this.sheet.duration < 0) {
 			this.sheet.duration = (this.sheet.duration + this.sheet.speed) % this.sheet.speed;
 			this.sheet.index++;
-			
-			// let frame = this.strip[this.sheet.index];
-			// this.sheet.frame = frame;
+
+			if (this.sheet.index >= this.sheet.strip.length-1) {
+				let index = this.arena.entities.indexOf(this);
+				this.arena.entities.splice(index, 1);
+			}
 		}
 	}
 
 	render(ctx) {
+		let sheet = this.sheet,
+			{ x, y } = sheet.strip[sheet.index],
+			w = 64,
+			h = 64;
 		ctx.save();
-		ctx.translate(this.left, this.top);
-		ctx.drawImage(this.sheet.strip.img, 0, 0, 96, 32);
+		ctx.translate(this.left - (w/2), this.top - (h/2));
+		ctx.drawImage(sheet.img, x, y, w, h, 0, 0, w, h);
+
 		ctx.restore();
 	}
 }

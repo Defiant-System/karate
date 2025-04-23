@@ -16,6 +16,8 @@
 		<Menu name="Slow" click="set-speed" arg="700"/>
 		<Menu name="Fast" click="set-speed" arg="120"/>
 		<Menu type="divider"/>
+		<Menu name="Toggle Hit Boxes" click="toggle-show-hits"/>
+		<Menu type="divider"/>
 		<Menu name="Sprite Editor" click="open-editor"/>
 	</Menu>
 	<Menu name="Help">

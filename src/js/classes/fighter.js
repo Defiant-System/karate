@@ -91,13 +91,14 @@ class Fighter {
 
 			if (frame.hit) {
 				// console.log("player flip", this.flip);
-				let hS = this.size * .5;
+				// let hS = this.size * .5;
 				let hits = frame.hit.map(h => {
 						// console.log(h.x , this.left);
 						return {
 							r: h.r,
 							y: this.top + h.y,
-							x: this.left + (this.flip > 0 ? (h.x > hS ? hS - (h.x % hS) : this.size - h.x) : h.x),
+							// x: this.left + (this.flip > 0 ? (h.x > hS ? hS - (h.x % hS) : this.size - h.x) : h.x),
+							x: this.left + (this.flip > 0 ? -(h.x - this.size) : h.x),
 						};
 					}),
 					contact = [],
@@ -115,7 +116,8 @@ class Fighter {
 						hurts.push({
 							r: h.r,
 							y: fighter.top + h.y,
-							x: fighter.left + (fighter.flip > 0 ? (h.x > hS ? hS - (h.x % hS) : this.size - h.x) : h.x),
+							// x: fighter.left + (fighter.flip > 0 ? (h.x > hS ? hS - (h.x % hS) : this.size - h.x) : h.x),
+							x: fighter.left + (fighter.flip > 0 ? -(h.x - fighter.size) : h.x),
 							fighter,
 							tgt,
 						})
@@ -128,12 +130,16 @@ class Fighter {
 								maxArea = (max ** 2) * Math.PI,
 								overlap = this.areaOfIntersection(hit.x, hit.y, hit.r, hurt.x, hurt.y, hurt.r),
 								perc = overlap / maxArea;
-							console.log( hit.r, hurt.r, (perc*100)|0 );
+							// console.log( hit.r, hurt.r, (perc*100)|0 );
 							if (perc > .3) {
 								// this._contact.push(hurt);
 								// KO anim
 								hurt.fighter._KO = true;
 								hurt.fighter.move(`${hurt.tgt}Ko`);
+
+								let x = Math.lerp(hit.x, hurt.x, .5),
+									y = Math.lerp(hit.y, hurt.y, .5);
+								this.arena.smack({ x, y });
 							}
 						}
 					});
@@ -166,14 +172,14 @@ class Fighter {
 		if (this.flip > 0) {
 			ctx.translate(this.left+sw, this.top);
 			ctx.scale(-1, 1);
-			if (this.arena._newGfx) ctx.drawImage(this.arena.assets.stance.img, 0, 0, 144, 144);
+			if (this.arena._newGfx) ctx.drawImage(this.arena.assets.modern.img, 0, 0, 144, 144);
 			else ctx.drawImage(this.asset.cvs, x, y, w, h, 0, 0, sw, sh);
 			// render hit/hurt boxes
 			if (this.arena._showHitHurt && !this.arena._newGfx) this.renderHitHurt(ctx, hit, hurt);
 			ctx.setTransform(1,0,0,1,0,0);
 		} else {
 			ctx.translate(this.left, this.top);
-			if (this.arena._newGfx) ctx.drawImage(this.arena.assets.stance.img, 0, 0, 144, 144);
+			if (this.arena._newGfx) ctx.drawImage(this.arena.assets.modern.img, 0, 0, 144, 144);
 			else ctx.drawImage(this.asset.cvs, x, y, w, h, 0, 0, sw, sh);
 			// render hit/hurt boxes
 			if (this.arena._showHitHurt && !this.arena._newGfx) this.renderHitHurt(ctx, hit, hurt);

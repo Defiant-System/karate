@@ -1,12 +1,22 @@
 
 let Assets = {
 	sprites: [
-		{ id: "smack", width: 96, height: 32, src: "~/icons/smack.png" },
-		{ id: "stance", width: 144, height: 144, src: "~/icons/stance-01.png" },
+		{ id: "smack", width: 192, height: 64, src: "~/icons/smack.png" },
+		{ id: "modern", width: 144, height: 144, src: "~/icons/modern-01.png" },
 		{ id: "fighter", width: 720, height: 720, src: "~/gfx/sprite.png" },
 	],
-	smack: {},
-	stance: {},
+	smack: {
+		strip: [
+			{ x: 0, y: 0 },
+			{ x: 64, y: 0 },
+			{ x: 128, y: 0 },
+		]
+	},
+	modern: {
+		strip: [
+			{ x: 0, y: 0 },
+		]
+	},
 	fighter: {
 		headButt: @import "anim/headButt.js",
 		backKick: @import "anim/backKick.js",
@@ -20,9 +30,9 @@ let Assets = {
 		sweep: @import "anim/sweep.js",
 		highPunch: @import "anim/highPunch.js",
 		midPunch: @import "anim/midPunch.js",
-		highKo: @import "anim/highKo.js",
-		midKo: @import "anim/midKo.js",
-		lowKo: @import "anim/lowKo.js",
+		highKo: @import "anim/highKO.js",
+		midKo: @import "anim/midKO.js",
+		lowKo: @import "anim/lowKO.js",
 		jump: @import "anim/jump.js",
 		highBlock: @import "anim/highBlock.js",
 		midBlock: @import "anim/midBlock.js",
