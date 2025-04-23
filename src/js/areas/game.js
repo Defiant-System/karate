@@ -56,7 +56,7 @@
 					case "y": Player.move("bow", event.char); break;
 
 					case "a": Player.move("backFlip", event.char); break;
-					case "s": Player.move("hiKo", event.char); break;
+					case "s": Player.move("highKo", event.char); break;
 					case "d": Player.move("lowKo", event.char); break;
 					case "f": Player.move("midKo", event.char); break;
 					case "g": Player.move("jump", event.char); break;

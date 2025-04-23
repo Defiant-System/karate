@@ -146,10 +146,12 @@ class Fighter {
 								// KO anim
 								hurt.fighter._KO = true;
 								hurt.fighter.move(`${hurt.tgt}Ko`);
-
-								let x = Math.lerp(hit.x, hurt.x, .5),
-									y = Math.lerp(hit.y, hurt.y, .5);
-								this.arena.smack({ x, y });
+								// smack animation if target was the head
+								if (perc > .7 && hurt.tgt === "high") {
+									let x = Math.lerp(hit.x, hurt.x, .5),
+										y = Math.lerp(hit.y, hurt.y, .5);
+									this.arena.smack({ x, y });
+								}
 							}
 						}
 					});
@@ -214,6 +216,7 @@ class Fighter {
 				ctx.clip(region);
 				// flip sprite frame
 				ctx.translate(0, 280);
+				// ctx.setTransform(1, 0, -Math.tan(Math.PI/4), 1, 0, 0);
 				ctx.scale(1, -1);
 				ctx.globalAlpha = .75;
 				ctx.drawImage(this.asset.shadow.cvs, x, y, w, h, 0, 0, sw, sh);
