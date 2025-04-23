@@ -18,11 +18,8 @@ class Fighter {
 
 		// repaints sprite for fighter
 		ctx.drawImage(this.asset.img, 0, 0);
-		this.asset.shadow.ctx.drawImage(this.asset.cvs, 0, 0);
 		let pixels = ctx.getImageData(0, 0, width, height),
-			data = pixels.data,
-			sP = this.asset.shadow.ctx.getImageData(0, 0, width, height),
-			sD = sP.data;
+			data = pixels.data;
 		for (let i=0; i<data.length; i+=4) {
 			let r = data[i+0],
 				g = data[i+1],
@@ -36,15 +33,22 @@ class Fighter {
 			data[i+0] = r;
 			data[i+1] = g;
 			data[i+2] = b;
-			if (sD[i+3] > 0) {
-				sD[i+0] = sD[i+1] = sD[i+2] = 0; // 255-sD[i+3];
-			}
 		}
 		ctx.putImageData(pixels, 0, 0);
-		this.asset.shadow.ctx.putImageData(sP, 0, 0);
+
+		// fighter shadow
+		this.asset.shadow.ctx.drawImage(this.asset.cvs, 0, 0);
+		pixels = this.asset.shadow.ctx.getImageData(0, 0, width, height),
+		data = pixels.data
+		for (let i=0; i<data.length; i+=4) {
+			if (data[i+3] > 0) {
+				// data[i+0] = data[i+1] = data[i+2] = 0; // 255-data[i+3];
+			}
+		}
+		this.asset.shadow.ctx.putImageData(pixels, 0, 0);
 
 		this.size = 144;
-		this.top = 310;
+		this.top = 220;
 		this.left = left || 100;
 		this.flip = flip || -1;
 		this.opponents = [];
@@ -178,7 +182,9 @@ class Fighter {
 			w = 72,
 			h = 72,
 			sw = this.size,
-			sh = this.size;
+			sh = this.size,
+			toRadians = angle => angle * (Math.PI / 180),
+			angle = ((this.left - this.arena._aW) / this.arena._aW) * 30;
 		// console.log(x, y, w, h );
 		ctx.save();
 		if (this.flip > 0) {
@@ -190,12 +196,12 @@ class Fighter {
 				ctx.save();
 				// shadow region
 				let region = new Path2D();
-				region.rect(0, 140, 144, 16);
+				region.rect(0, 140, 144, 160);
 				ctx.clip(region);
 				// flip sprite frame
 				ctx.translate(0, 280);
 				ctx.scale(1, -1);
-				ctx.globalAlpha = .75;
+				ctx.globalAlpha = .5;
 				ctx.drawImage(this.asset.shadow.cvs, x, y, w, h, 0, 0, sw, sh);
 				ctx.restore();
 				// draw fighter
@@ -212,12 +218,14 @@ class Fighter {
 				ctx.save();
 				// shadow region
 				let region = new Path2D();
-				region.rect(0, 140, 144, 16);
+				region.rect(0, 140, 144, 160);
 				ctx.clip(region);
+
 				// flip sprite frame
-				ctx.translate(0, 280);
-				// ctx.setTransform(1, 0, -Math.tan(Math.PI/4), 1, 0, 0);
+				ctx.translate((angle/30) * 72, 280);
+				ctx.transform(1,0,toRadians(angle),1,0,0);
 				ctx.scale(1, -1);
+
 				ctx.globalAlpha = .75;
 				ctx.drawImage(this.asset.shadow.cvs, x, y, w, h, 0, 0, sw, sh);
 				ctx.restore();
