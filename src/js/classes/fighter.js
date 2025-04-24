@@ -149,7 +149,19 @@ class Fighter {
 								// this._contact.push(hurt);
 								// KO anim
 								hurt.fighter._KO = true;
-								hurt.fighter.move(`${hurt.tgt}Ko`);
+
+								let target = hurt.tgt,
+									isBehind = false;
+								if (this.flip === hurt.fighter.flip) {
+									if ((this.flip > 0 && this.left > hurt.fighter.left)
+										|| (this.flip < 0 && this.left < hurt.fighter.left)) {
+										isBehind = true;
+									}
+								}
+								// todo: check if attacked from behind and adjust KO anim accordingly
+								if (isBehind) target = "low";
+								
+								hurt.fighter.move(`${target}Ko`);
 								// smack animation if target was the head
 								if (perc > .7 && hurt.tgt === "high") {
 									let x = Math.lerp(hit.x, hurt.x, .5),
