@@ -191,8 +191,8 @@ class Fighter {
 	render(ctx) {
 		let sheet = this.sheet,
 			{ x, y, hit, hurt } = sheet.strip[sheet.index],
-			w = 72,
-			h = 72,
+			w = this.size,
+			h = this.size,
 			sw = this.size,
 			sh = this.size,
 			toRadians = angle => angle * (Math.PI / 180),
@@ -202,53 +202,51 @@ class Fighter {
 		if (this.flip > 0) {
 			ctx.translate(this.left+sw, this.top);
 			ctx.scale(-1, 1);
-			if (this.arena._newGfx) ctx.drawImage(this.arena.assets.modern.img, 0, 0, 144, 144);
-			else {
-				// render shadow
-				ctx.save();
-				// shadow region
-				let region = new Path2D();
-				region.rect(-40, 140, 184, 24);
-				ctx.clip(region);
-				
-				// flip sprite frame
-				ctx.translate(-(angle/30) * 72, 280);
-				ctx.transform(1,0,-toRadians(angle),1,0,0);
-				ctx.scale(1, -1);
-				
-				ctx.globalAlpha = .5;
-				ctx.drawImage(this.asset.shadow.cvs, x, y, w, h, 0, 0, sw, sh);
-				ctx.restore();
-				// draw fighter
-				ctx.drawImage(this.asset.cvs, x, y, w, h, 0, 0, sw, sh);
-			}
+			
+			// render shadow
+			ctx.save();
+			// shadow region
+			let region = new Path2D();
+			region.rect(-40, 110, 184, 54);
+			ctx.clip(region);
+			
+			// flip sprite frame
+			ctx.translate(-(angle/30) * 62, 255);
+			ctx.transform(1,0,-toRadians(angle),1,0,0);
+			ctx.scale(1, -1);
+			
+			ctx.globalAlpha = .3;
+			ctx.drawImage(this.asset.shadow.cvs, x, y, w, h, 0, 0, sw, sh);
+			ctx.restore();
+			// draw fighter
+			ctx.drawImage(this.asset.cvs, x, y, w, h, 0, 0, sw, sh);
+
 			// render hit/hurt boxes
-			if (this.arena._showHitHurt && !this.arena._newGfx) this.renderHitHurt(ctx, hit, hurt);
+			if (this.arena._showHitHurt) this.renderHitHurt(ctx, hit, hurt);
 			ctx.setTransform(1,0,0,1,0,0);
 		} else {
 			ctx.translate(this.left, this.top);
-			if (this.arena._newGfx) ctx.drawImage(this.arena.assets.modern.img, 0, 0, 144, 144);
-			else {
-				// render shadow
-				ctx.save();
-				// shadow region
-				let region = new Path2D();
-				region.rect(-40, 140, 184, 24);
-				ctx.clip(region);
 
-				// flip sprite frame
-				ctx.translate((angle/30) * 72, 280);
-				ctx.transform(1,0,toRadians(angle),1,0,0);
-				ctx.scale(1, -1);
+			// render shadow
+			ctx.save();
+			// shadow region
+			let region = new Path2D();
+			region.rect(-40, 110, 184, 54);
+			ctx.clip(region);
 
-				ctx.globalAlpha = .5;
-				ctx.drawImage(this.asset.shadow.cvs, x, y, w, h, 0, 0, sw, sh);
-				ctx.restore();
-				// draw fighter
-				ctx.drawImage(this.asset.cvs, x, y, w, h, 0, 0, sw, sh);
-			}
+			// flip sprite frame
+			ctx.translate((angle/30) * 62, 255);
+			ctx.transform(1,0,toRadians(angle),1,0,0);
+			ctx.scale(1, -1);
+
+			ctx.globalAlpha = .3;
+			ctx.drawImage(this.asset.shadow.cvs, x, y, w, h, 0, 0, sw, sh);
+			ctx.restore();
+			// draw fighter
+			ctx.drawImage(this.asset.cvs, x, y, w, h, 0, 0, sw, sh);
+
 			// render hit/hurt boxes
-			if (this.arena._showHitHurt && !this.arena._newGfx) this.renderHitHurt(ctx, hit, hurt);
+			if (this.arena._showHitHurt) this.renderHitHurt(ctx, hit, hurt);
 		}
 		ctx.restore();
 

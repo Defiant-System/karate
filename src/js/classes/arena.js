@@ -15,7 +15,6 @@ class Arena {
 
 		// config
 		this._speed = 120;
-		this._newGfx = false;
 		this._showHitHurt = false;
 		this._fW = 144;
 		this._aW = (this.width - this._fW) * .5;

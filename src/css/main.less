@@ -7,7 +7,7 @@ content {
 	bottom: 0;
 
 	.game-view {
-		background: #fff;
+		background: linear-gradient(90deg, #dfdfdf, #e7e7e7);
 		position: absolute;
 		top: 0;
 		left: 0;
@@ -26,17 +26,17 @@ content {
 			background-image: var( --img );
 		}
 
-		&[style*="--img: url('~/gfx/bg-01.png');"] {
-			background: #000;
+		// &.d[style*="--img: url('~/gfx/bg-01.png');"] {
+		// 	background: #000;
 
-			&:before {
-				top: 0;
-				left: 10px;
-				width: 760px;
-				height: 495px;
-				image-rendering: pixelated;
-			}
-		}
+		// 	&:before {
+		// 		top: 0;
+		// 		left: 10px;
+		// 		width: 760px;
+		// 		height: 495px;
+		// 		image-rendering: pixelated;
+		// 	}
+		// }
 
 		canvas {
 			// background: red;

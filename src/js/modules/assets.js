@@ -12,7 +12,7 @@ let Assets = {
 	sprites: [
 		{ id: "smack", width: 192, height: 64, src: "~/icons/smack.png" },
 		{ id: "modern", width: 144, height: 144, src: "~/icons/modern-01.png" },
-		{ id: "fighter", width: 720, height: 720, src: "~/gfx/sprite.png" },
+		{ id: "fighter", width: 720, height: 720, src: "~/icons/fighter.png" },
 	],
 	smack: {
 		strip: [
