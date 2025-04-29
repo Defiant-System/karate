@@ -209,7 +209,7 @@ class Fighter {
 			// ctx.clip(region);
 			
 			// // flip sprite frame
-			// ctx.translate(-(angle/30) * 62, 255);
+			// ctx.translate((angle/30) * 72, 271);
 			// ctx.transform(1,0,-toRadians(angle),1,0,0);
 			// ctx.scale(1, -1);
 			
@@ -226,20 +226,20 @@ class Fighter {
 			ctx.translate(this.left, this.top);
 
 			// render shadow
-			// ctx.save();
-			// // shadow region
-			// let region = new Path2D();
-			// region.rect(-40, 110, 184, 54);
-			// ctx.clip(region);
+			ctx.save();
+			// shadow region
+			let region = new Path2D();
+			region.rect(-40, 135, 184, 54);
+			ctx.clip(region);
 
-			// // flip sprite frame
-			// ctx.translate((angle/30) * 62, 255);
-			// ctx.transform(1,0,toRadians(angle),1,0,0);
-			// ctx.scale(1, -1);
+			// flip sprite frame
+			ctx.translate((angle/30) * 72, 271);
+			ctx.transform(1,0,toRadians(angle),1,0,0);
+			ctx.scale(1, -1);
 
-			// ctx.globalAlpha = .3;
-			// ctx.drawImage(this.asset.shadow.cvs, x, y, w, h, 0, 0, sw, sh);
-			// ctx.restore();
+			ctx.globalAlpha = .3;
+			ctx.drawImage(this.asset.shadow.cvs, x, y, w, h, 0, 0, sw, sh);
+			ctx.restore();
 
 			// draw fighter
 			ctx.drawImage(this.asset.cvs, x, y, w, h, 0, 0, sw, sh);
