@@ -111,7 +111,6 @@ class Fighter {
 						return {
 							r: h.r,
 							y: this.top + h.y,
-							// x: this.left + (this.flip > 0 ? (h.x > hS ? hS - (h.x % hS) : this.size - h.x) : h.x),
 							x: this.left + (this.flip > 0 ? -(h.x - this.size) : h.x),
 						};
 					}),
@@ -130,7 +129,6 @@ class Fighter {
 						hurts.push({
 							r: h.r,
 							y: fighter.top + h.y,
-							// x: fighter.left + (fighter.flip > 0 ? (h.x > hS ? hS - (h.x % hS) : this.size - h.x) : h.x),
 							x: fighter.left + (fighter.flip > 0 ? -(h.x - fighter.size) : h.x),
 							fighter,
 							tgt,
@@ -203,21 +201,21 @@ class Fighter {
 			ctx.translate(this.left+sw, this.top);
 			ctx.scale(-1, 1);
 			
-			// render shadow
-			ctx.save();
-			// shadow region
-			let region = new Path2D();
-			region.rect(-40, 110, 184, 54);
-			ctx.clip(region);
+			// // render shadow
+			// ctx.save();
+			// // shadow region
+			// let region = new Path2D();
+			// region.rect(-40, 110, 184, 54);
+			// ctx.clip(region);
 			
-			// flip sprite frame
-			ctx.translate(-(angle/30) * 62, 255);
-			ctx.transform(1,0,-toRadians(angle),1,0,0);
-			ctx.scale(1, -1);
+			// // flip sprite frame
+			// ctx.translate(-(angle/30) * 62, 255);
+			// ctx.transform(1,0,-toRadians(angle),1,0,0);
+			// ctx.scale(1, -1);
 			
-			ctx.globalAlpha = .3;
-			ctx.drawImage(this.asset.shadow.cvs, x, y, w, h, 0, 0, sw, sh);
-			ctx.restore();
+			// ctx.globalAlpha = .3;
+			// ctx.drawImage(this.asset.shadow.cvs, x, y, w, h, 0, 0, sw, sh);
+			// ctx.restore();
 			// draw fighter
 			ctx.drawImage(this.asset.cvs, x, y, w, h, 0, 0, sw, sh);
 
@@ -228,20 +226,21 @@ class Fighter {
 			ctx.translate(this.left, this.top);
 
 			// render shadow
-			ctx.save();
-			// shadow region
-			let region = new Path2D();
-			region.rect(-40, 110, 184, 54);
-			ctx.clip(region);
+			// ctx.save();
+			// // shadow region
+			// let region = new Path2D();
+			// region.rect(-40, 110, 184, 54);
+			// ctx.clip(region);
 
-			// flip sprite frame
-			ctx.translate((angle/30) * 62, 255);
-			ctx.transform(1,0,toRadians(angle),1,0,0);
-			ctx.scale(1, -1);
+			// // flip sprite frame
+			// ctx.translate((angle/30) * 62, 255);
+			// ctx.transform(1,0,toRadians(angle),1,0,0);
+			// ctx.scale(1, -1);
 
-			ctx.globalAlpha = .3;
-			ctx.drawImage(this.asset.shadow.cvs, x, y, w, h, 0, 0, sw, sh);
-			ctx.restore();
+			// ctx.globalAlpha = .3;
+			// ctx.drawImage(this.asset.shadow.cvs, x, y, w, h, 0, 0, sw, sh);
+			// ctx.restore();
+
 			// draw fighter
 			ctx.drawImage(this.asset.cvs, x, y, w, h, 0, 0, sw, sh);
 
