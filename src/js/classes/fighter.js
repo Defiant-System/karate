@@ -47,6 +47,14 @@ class Fighter {
 		}
 		this.asset.shadow.ctx.putImageData(pixels, 0, 0);
 
+		let gradient = this.asset.shadow.ctx.createLinearGradient(0, 94, 0, 144);
+		gradient.addColorStop(0, "#0000");
+		gradient.addColorStop(1, "#000");
+		this.asset.shadow.ctx.globalCompositeOperation = "source-in";
+		this.asset.shadow.ctx.fillStyle = gradient;
+		this.asset.shadow.ctx.fillRect(0, 0, 720, 144);
+
+
 		this.size = 144;
 		this.top = 302;
 		this.left = left || 100;
