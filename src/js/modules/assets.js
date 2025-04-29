@@ -1,5 +1,14 @@
 
 let Assets = {
+	belts: {
+		white: {},
+		yellow: {},
+		orange: {},
+		green: {},
+		blue: {},
+		brown: {},
+		black: {},
+	},
 	sprites: [
 		{ id: "smack", width: 192, height: 64, src: "~/icons/smack.png" },
 		{ id: "modern", width: 144, height: 144, src: "~/icons/modern-01.png" },
