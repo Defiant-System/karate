@@ -7,7 +7,7 @@ let Test = {
 
 		// auto stop Arena FPS control
 		setTimeout(() => APP.game.arena.fpsControl.stop(), 12900);
-		// return;
+		return;
 
 		// setTimeout(() => APP.game.arena.smack({ x: 250, y: 250 }), 1e3);
 		// return;

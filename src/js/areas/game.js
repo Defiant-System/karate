@@ -62,6 +62,8 @@
 					case "g": Player.move("jump", event.char); break;
 					case "h": Player.move("flip", event.char); break;
 
+					case "esc": Player.left = 490; break;
+
 					case "p":
 						if (this.arena.fpsControl._stopped) this.arena.fpsControl.start();
 						else this.arena.fpsControl.stop();

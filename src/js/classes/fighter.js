@@ -71,6 +71,11 @@ class Fighter {
 		this.sheet.speed = this.arena.speed;
 		this.sheet.duration = this.arena.speed;
 		this.sheet.index = 0;
+
+		let dy = this.sheet.strip[0].dy;
+		if (dy !== undefined) {
+			this.top += dy;
+		}
 	}
 
 	keyUp(char) {
@@ -80,10 +85,11 @@ class Fighter {
 	update(delta) {
 		let { strip, duration } = this.sheet,
 			len = strip.length;
-		this.sheet.duration -= delta;
 		if (this.sheet.duration < 0) {
 			this.sheet.duration = (this.sheet.duration + this.sheet.speed) % this.sheet.speed;
-			if (!this.sheet.wait || !strip[this.sheet.index].wait) this.sheet.index++;
+			if (!this.sheet.wait || !strip[this.sheet.index].wait) {
+				this.sheet.index++;
+			}
 
 			if (this.sheet.index > len-1) {
 				if (!["stance", "walk"].includes(this.sheet.name)) {
@@ -95,11 +101,11 @@ class Fighter {
 
 			let frame = strip[this.sheet.index];
 			this.sheet.frame = frame;
+			if (frame.dy !== undefined) this.top += frame.dy;
 			if (frame.dx !== undefined && (!this.sheet.wait || !this.sheet.w8l)) {
 				this.sheet.w8l = true;
 				this.left -= (frame.dx * this.flip);
 			}
-			if (frame.dy !== undefined) this.top += frame.dy;
 			if (frame.d) this.sheet.duration = frame.d;
 			if (frame.flip) this.flip *= -1;
 
@@ -173,6 +179,7 @@ class Fighter {
 				// console.log(this._contact);
 			}
 		}
+		this.sheet.duration -= delta;
 	}
 
 	areaOfIntersection(x0, y0, r0, x1, y1, r1) {
@@ -193,6 +200,7 @@ class Fighter {
 			h = this.size,
 			sw = this.size,
 			sh = this.size,
+			f = this.flip ? -1 : 1,
 			toRadians = angle => angle * (Math.PI / 180),
 			angle = ((this.left - this.arena._aW) / this.arena._aW) * 30;
 		// console.log(x, y, w, h );
@@ -201,27 +209,28 @@ class Fighter {
 			ctx.translate(this.left+sw, this.top);
 			ctx.scale(-1, 1);
 			
-			// // render shadow
-			// ctx.save();
-			// // shadow region
-			// let region = new Path2D();
-			// region.rect(-40, 110, 184, 54);
-			// ctx.clip(region);
+			// render shadow
+			ctx.save();
+			// shadow region
+			let region = new Path2D();
+			region.rect(-40, 135, 204, 69);
+			ctx.clip(region);
 			
-			// // flip sprite frame
-			// ctx.translate((angle/30) * 72, 271);
-			// ctx.transform(1,0,-toRadians(angle),1,0,0);
-			// ctx.scale(1, -1);
+			// flip sprite frame
+			ctx.translate(f * (((angle/30) * 72)), 271);
+			ctx.transform(1, 0, f * toRadians(angle), 1, 0, 0);
+			ctx.scale(1, -1);
 			
-			// ctx.globalAlpha = .3;
-			// ctx.drawImage(this.asset.shadow.cvs, x, y, w, h, 0, 0, sw, sh);
-			// ctx.restore();
+			ctx.globalAlpha = .3;
+			ctx.drawImage(this.asset.shadow.cvs, x, y, w, h, 0, 0, sw, sh);
+			ctx.restore();
+
 			// draw fighter
 			ctx.drawImage(this.asset.cvs, x, y, w, h, 0, 0, sw, sh);
 
 			// render hit/hurt boxes
 			if (this.arena._showHitHurt) this.renderHitHurt(ctx, hit, hurt);
-			ctx.setTransform(1,0,0,1,0,0);
+			ctx.setTransform(1, 0, 0, 1, 0, 0);
 		} else {
 			ctx.translate(this.left, this.top);
 
@@ -229,12 +238,12 @@ class Fighter {
 			ctx.save();
 			// shadow region
 			let region = new Path2D();
-			region.rect(-40, 135, 184, 54);
+			region.rect(-40, 135, 204, 69);
 			ctx.clip(region);
 
 			// flip sprite frame
-			ctx.translate((angle/30) * 72, 271);
-			ctx.transform(1,0,toRadians(angle),1,0,0);
+			ctx.translate(f * ((angle/30) * -72), 271);
+			ctx.transform(1, 0, f * -toRadians(angle), 1, 0, 0);
 			ctx.scale(1, -1);
 
 			ctx.globalAlpha = .3;

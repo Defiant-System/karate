@@ -78,7 +78,7 @@
 				// prepare DOM render
 				str = [];
 				Assets.fighter[Self._strip].strip.map(f => {
-					str.push(`<span ${f.flip ? `class="flip"` : ""} style="--fY: ${f.y / 72}; --fX: ${f.x / 72};"><i>${f.d | 120}ms</i><s>${f.dx | 0}px</s><b>${f.dy | 0}px</b></span>`);
+					str.push(`<span ${f.flip ? `class="flip"` : ""} style="--fY: ${f.y / 144}; --fX: ${f.x / 144};"><i>${f.d | 120}ms</i><s>${f.dx | 0}px</s><b>${f.dy | 0}px</b></span>`);
 				});
 				Self.els.frames.html(str.join(""));
 				// auto select first frame

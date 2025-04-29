@@ -65,9 +65,9 @@ class Arena {
 
 	ready() {
 		// adding player & opponents
-		this.player = new Player({ arena: this, colors: [[255,255,255],[145,145,145],[218,0,0]], left: 490 });
-		// this.entities.push(new AI({ arena: this, colors: [[218,0,0],[109,0,0],[238,102,238]], left: 400, flip: 1 }));
-		// this.entities.push(new AI({ arena: this, colors: [[0,0,255],[0,0,109],[218,218,0]], left: 550, flip: 1 }));
+		this.player = new Player({ arena: this, colors: [[255,255,255],[145,145,145],[218,0,0]], left: 90 });
+		this.entities.push(new AI({ arena: this, colors: [[218,0,0],[109,0,0],[238,102,238]], left: 400, flip: 1 }));
+		this.entities.push(new AI({ arena: this, colors: [[0,0,255],[0,0,109],[218,218,0]], left: 550, flip: 1 }));
 
 		// this.player = new Player({ arena: this, colors: [[255,255,255],[145,145,145],[218,0,0]], left: 400, flip: 1 });
 		// this.entities.push(new AI({ arena: this, colors: [[218,0,0],[109,0,0],[238,102,238]], left: 315, flip: 1 }));
