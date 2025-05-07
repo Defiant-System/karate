@@ -18,28 +18,28 @@ class Fighter {
 
 		// repaints sprite for fighter
 		ctx.drawImage(this.asset.img, 0, 0);
-		let pixels = ctx.getImageData(0, 0, width, height),
-			data = pixels.data;
-		for (let i=0; i<data.length; i+=4) {
-			let r = data[i+0],
-				g = data[i+1],
-				b = data[i+2],
-				len = 3;
-			while (len--) {
-				if (palette[len][0] === r && palette[len][1] === g && palette[len][2] === b) {
-					[r,g,b] = colors[len];
-				}
-			}
-			data[i+0] = r;
-			data[i+1] = g;
-			data[i+2] = b;
-		}
-		ctx.putImageData(pixels, 0, 0);
+		// let pixels = ctx.getImageData(0, 0, width, height),
+		// 	data = pixels.data;
+		// for (let i=0; i<data.length; i+=4) {
+		// 	let r = data[i+0],
+		// 		g = data[i+1],
+		// 		b = data[i+2],
+		// 		len = 3;
+		// 	while (len--) {
+		// 		if (palette[len][0] === r && palette[len][1] === g && palette[len][2] === b) {
+		// 			[r,g,b] = colors[len];
+		// 		}
+		// 	}
+		// 	data[i+0] = r;
+		// 	data[i+1] = g;
+		// 	data[i+2] = b;
+		// }
+		// ctx.putImageData(pixels, 0, 0);
 
 		// fighter shadow
 		this.asset.shadow.ctx.drawImage(this.asset.cvs, 0, 0);
-		pixels = this.asset.shadow.ctx.getImageData(0, 0, width, height),
-		data = pixels.data
+		let pixels = this.asset.shadow.ctx.getImageData(0, 0, width, height);
+		let data = pixels.data
 		for (let i=0; i<data.length; i+=4) {
 			if (data[i+3] > 0) {
 				data[i+0] = data[i+1] = data[i+2] = 0; // 255-data[i+3];
