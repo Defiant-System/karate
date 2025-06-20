@@ -9,6 +9,11 @@ let Assets = {
 		brown: {},
 		black: {},
 	},
+	graphix: [
+		{ id: "bg", src: "~/gfx/bg.png" },
+		{ id: "mg", src: "~/gfx/mg.png" },
+		{ id: "fg", src: "~/gfx/fg.png" },
+	],
 	sprites: [
 		{ id: "smack", width: 192, height: 64, src: "~/icons/smack.png" },
 		{ id: "modern", width: 144, height: 144, src: "~/icons/modern-01.png" },

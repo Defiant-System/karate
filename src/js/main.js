@@ -1,5 +1,6 @@
 
 @import "./classes/arena.js"
+@import "./classes/viewport.js"
 @import "./classes/smack.js"
 @import "./classes/fighter.js"
 @import "./classes/player.js"

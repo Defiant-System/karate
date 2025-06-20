@@ -23,7 +23,7 @@ class Arena {
 		let Self = this;
 		this.fpsControl = karaqu.FpsControl({
 			fps: 60,
-			autoplay: true,
+			// autoplay: true,
 			callback(time, delta) {
 				Self.update(delta, time);
 				Self.render();
@@ -31,7 +31,7 @@ class Arena {
 		});
 
 		// assets list
-		let assets = [...Assets.sprites],
+		let assets = [...Assets.sprites, ...Assets.graphix],
 			loadAssets = () => {
 				let item = assets.pop(),
 					img = new Image();
@@ -39,7 +39,7 @@ class Arena {
 				img.onload = () => {
 					// save reference to asset
 					this.assets[item.id] = { item, img };
-					if (Assets[item.id].strip) this.assets[item.id].strip = Assets[item.id].strip;
+					if (Assets[item.id]?.strip) this.assets[item.id].strip = Assets[item.id].strip;
 					// are we done yet?
 					assets.length ? loadAssets() : this.ready();
 				};
@@ -64,6 +64,9 @@ class Arena {
 	}
 
 	ready() {
+		// viewport
+		this.viewport = new Viewport({ arena: this });
+
 		// adding player & opponents
 		this.player = new Player({ arena: this, colors: [[255,255,255],[145,145,145],[218,0,0]], left: 90 });
 		this.entities.push(new AI({ arena: this, colors: [[218,0,0],[109,0,0],[238,102,238]], left: 400, flip: 1 }));
@@ -82,6 +85,9 @@ class Arena {
 		this.entities.push(this.player);
 		// set fighter opponent
 		this.entities.map(fighter => fighter.opponents = this.entities.filter(f => f !== fighter));
+
+		// start game loop
+		this.fpsControl.start();
 	}
 
 	update(delta, time) {
@@ -92,6 +98,8 @@ class Arena {
 		// clear canvas
 		this.cvs.attr({ width: this.width });
 		this.ctx.imageSmoothingEnabled = false;
+		// render viewport
+		this.viewport.render(this.ctx);
 		// draw entries - exclude droids
 		this.entities.map(entity => entity.render(this.ctx));
 
